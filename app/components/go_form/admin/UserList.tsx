@@ -10,19 +10,15 @@ export default function UserList({
 }) {
   return (
     <div className="space-y-4">
-      {users.length === 0 ? (
-        <p className="text-center text-gray-500">No users found.</p>
-      ) : (
-        users.map((user) => (
-          <UserItem
-            key={user.id}
-            user={user}
-            onToggleBlock={onToggleBlock}
-            onToggleAdmin={onToggleAdmin}
-            onDelete={onDelete}
-          />
-        ))
-      )}
+      {users.map((user) => (
+        <UserItem
+          key={user.id}
+          user={user}
+          onToggleBlock={onToggleBlock}
+          onToggleAdmin={onToggleAdmin}
+          onDelete={onDelete}
+        />
+      ))}
     </div>
   );
 }

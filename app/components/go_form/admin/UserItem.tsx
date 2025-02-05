@@ -37,14 +37,17 @@ export default function UserItem({
           onClick={() => {
             onToggleAdmin(user.id);
             toast.success(
-              `${user.first_name} ${user.last_name} has been ${user.isAdmin ? "promoted to admin" : "demoted from admin"}`
+              `${user.first_name} ${user.last_name} has been ${
+                user.isAdmin ? "demoted from admin" : "promoted to admin"
+              }`
             );
           }}
         >
           <UserCog
-            className={`h-4 w-4 ${user.isAdmin ? "text-red-500" : "text-green-500"}`}
+            className={`h-4 w-4 ${user.isAdmin ? "text-green-500" : "text-red-500"}`}
           />
         </Button>
+
         <DeleteDialog user={user} onDelete={onDelete} />
       </div>
     </div>
