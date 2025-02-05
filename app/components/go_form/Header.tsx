@@ -5,11 +5,11 @@ import Search from "./search/Search";
 import AdminPanel from "./admin/AdminPanel";
 import { UserButton } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
-import { fetchUserStatus } from "@/../lib/actions/actions";
+import { fetchUserAdminStatus } from "@/../lib/actions/actions";
 
 export default async function Header() {
   const user = await currentUser();
-  const isAdmin = await fetchUserStatus({ id: user.id });
+  const isAdmin = await fetchUserAdminStatus({ id: user.id });
 
   return (
     <header className="flex justify-between items-center sticky top-0 gap-x-4 px-4 py-2 bg-white z-50 max-w-screen-2xl mx-auto shadow">

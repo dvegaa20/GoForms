@@ -29,6 +29,14 @@ export async function fetchUsers() {
 
 export async function fetchUserStatus({ id }) {
   try {
+    return await sql`SELECT status FROM Users WHERE id = ${id}`;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function fetchUserAdminStatus({ id }) {
+  try {
     return await sql`SELECT admin FROM Users WHERE id = ${id}`;
   } catch (error) {
     console.error(error);
