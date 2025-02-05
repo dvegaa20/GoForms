@@ -1,6 +1,6 @@
 "use client";
 
-import { Lock, Unlock, Trash, UserCog } from "lucide-react";
+import { Lock, Unlock, UserCog } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import DeleteDialog from "./DeleteDialog";

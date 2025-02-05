@@ -9,7 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Link2, Send, Mail, QrCode } from "lucide-react";
+import { Link2, Send, QrCode } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Select,

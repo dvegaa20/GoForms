@@ -2,15 +2,12 @@
 
 import React, { useCallback, useEffect } from "react";
 import {
-  Command,
   CommandDialog,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator,
-  CommandShortcut,
 } from "@/components/ui/command";
 import { SearchIcon, Command as LucideCommand, ChevronUp } from "lucide-react";
 import { useDialogStore } from "@/../store/store";

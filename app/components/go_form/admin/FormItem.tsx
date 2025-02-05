@@ -1,6 +1,6 @@
 "use client";
 
-import { Trash, Edit } from "lucide-react";
+import { Edit } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import DeleteDialog from "./DeleteDialog";

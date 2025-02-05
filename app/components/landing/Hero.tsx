@@ -1,7 +1,6 @@
 import React from "react";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { BackgroundBeamsWithCollision } from "../ui/background-beams-with-collision";
 
 export default function Hero() {
   return (

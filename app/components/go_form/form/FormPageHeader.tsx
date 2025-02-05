@@ -1,5 +1,5 @@
 import { UserButton } from "@clerk/nextjs";
-import { Layers, MoreVertical } from "lucide-react";
+import { Layers } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import SendForm from "./SendForm";
