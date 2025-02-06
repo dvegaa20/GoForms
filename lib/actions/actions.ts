@@ -4,7 +4,7 @@ import { neon } from "@neondatabase/serverless";
 
 const sql = neon(process.env.DATABASE_URL);
 
-// User Fetching
+// User and User Data Fetching
 
 export async function postUserData({ id, firstName, lastName, email }) {
   try {
@@ -106,22 +106,69 @@ export async function fetchAllFormsData({ id }) {
 
 export async function getQuestions({ id }) {
   try {
-    return await sql`SELECT questions FROM questions WHERE template_id = ${id}`;
+    return await sql`SELECT questions 
+    FROM questions 
+    WHERE template_id = ${id}`;
   } catch (error) {
     console.error(error);
   }
 }
 
-export async function getRespones({ id }) {
+export async function getResponses({ id }) {
   try {
-    return await sql`SELECT f.id, f.user_id, f.responses, f.submitted_at, t.title, t.description
-FROM forms f
-JOIN templates t ON f.template_id = t.id
-WHERE f.template_id = ${id}
-ORDER BY f.submitted_at DESC`;
+    return await sql`SELECT form_data 
+    FROM formsdata 
+    WHERE form_identifier = ${id}`;
   } catch (error) {
     console.error(error);
   }
 }
 
-// User Data Fetching
+export async function getIndividualResponses({ id }) {
+  try {
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Form Actions
+export async function addFormData(prevState: any, formData: FormData) {
+  console.log(formData);
+
+  const rawFormData = Object.entries(Object.fromEntries(formData))
+    .filter(([key, value]) => !key.startsWith("$ACTION"))
+    .map(([key, value]) => ({ key, value }));
+
+  const formIdentifier = rawFormData
+    .find((data) => data.key === "identifier")
+    ?.value.toString();
+
+  const formDataToSubmit = rawFormData.filter(
+    (data) => data.key !== "identifier"
+  );
+
+  if (!formIdentifier) return;
+
+  let error: ErrorResponse | null = null;
+  let formDataEntity: any = null;
+
+  try {
+    formDataEntity = await sql`
+      INSERT INTO FormsData (form_identifier, form_data) 
+      VALUES (${formIdentifier}, ${JSON.stringify(formDataToSubmit)}) 
+      RETURNING id
+    `;
+
+    if (!formDataEntity.length || !formDataEntity[0].id) {
+      error = {
+        statusCode: 500,
+        message: "Error adding data to the form.",
+      };
+      return { error: error.message };
+    }
+
+    return { success: true, formIdentifier };
+  } catch (error) {
+    return { error: error.message };
+  }
+}
