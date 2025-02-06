@@ -22,3 +22,8 @@ declare interface Question {
   question_description?: string;
   options?: string[];
 }
+
+declare type ErrorResponse = {
+  statusCode: number;
+  message: string;
+};
