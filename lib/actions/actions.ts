@@ -27,9 +27,19 @@ export async function fetchUsers() {
   }
 }
 
-export async function fetchUserStatus({ id }) {
+export async function fetchUserStatus({
+  id,
+  email,
+}: {
+  id?: string;
+  email?: string;
+}) {
   try {
-    return await sql`SELECT status FROM Users WHERE id = ${id}`;
+    if (id) {
+      return await sql`SELECT status FROM Users WHERE id = ${id}`;
+    } else if (email) {
+      return await sql`SELECT status FROM Users WHERE email = ${email}`;
+    }
   } catch (error) {
     console.error(error);
   }
@@ -124,11 +134,60 @@ export async function getResponses({ id }) {
   }
 }
 
-export async function getIndividualResponses({ id }) {
-  try {
-  } catch (error) {
-    console.error(error);
-  }
+export async function getNumberOfResponses(
+  responses: any[],
+  questionTitle: string
+) {
+  const attributeCounts = responses
+    .flatMap((response) =>
+      response.formData
+        .filter((item: any) => item.value !== "")
+        .map((item: any) => item.question_title)
+    )
+    .reduce(
+      (counts, title) => {
+        counts[title] = (counts[title] || 0) + 1;
+        return counts;
+      },
+      {} as Record<string, number>
+    );
+
+  return attributeCounts[questionTitle] || 0;
+}
+
+export async function getIndividualResponses(
+  responses: any[],
+  questionTitle: string
+) {
+  const items = responses.flatMap((response) => {
+    const formData = response.formData;
+
+    const attribute = formData.find(
+      (item) => item.question_title === questionTitle
+    );
+
+    if (!attribute?.value) return [];
+
+    return { ...attribute };
+  });
+
+  // Agrupar respuestas similares y contar cuántas veces aparecen
+  const groupedItems = items.reduce(
+    (counts, item) => {
+      if (!item.value) return counts;
+
+      counts[item.value] = (counts[item.value] || 0) + 1;
+      return counts;
+    },
+    {} as Record<string, number>
+  );
+
+  // Convertir el objeto en un array de respuestas con su conteo
+  return Object.entries(groupedItems).map(([value, count]) => ({
+    value,
+    count,
+    questionTitle,
+  }));
 }
 
 // Form Actions
