@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Card,
   CardContent,
@@ -6,14 +8,18 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import React from "react";
+import React, { useActionState, useEffect } from "react";
 import { cn } from "@/../lib/utils";
 import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { attributeTypeToInputType } from "@/../types/types";
+import { addFormData } from "@/../lib/actions/actions";
 import { FormInputIcon } from "lucide-react";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { useRouter } from "next/navigation";
+import SubmitButton from "./SubmitButton";
+import Link from "next/link";
 
 export default function MainForm({
   form,
@@ -24,7 +30,19 @@ export default function MainForm({
   formQuestions: any;
   publicForm?: boolean;
 }) {
+  const router = useRouter();
   const questions = formQuestions[0].questions;
+  const initialState = {
+    error: "",
+  };
+  const [state, formAction] = useActionState(addFormData, initialState);
+
+  useEffect(() => {
+    if (state.success) {
+      router.push(`/forms/${state.formIdentifier}/success`);
+    }
+  }, [state, router]);
+
   return (
     <main
       className={cn(
@@ -41,14 +59,19 @@ export default function MainForm({
       </Card>
 
       {questions.length > 0 ? (
-        <form className="space-y-3.5">
+        <form className="space-y-3.5" action={formAction}>
           <input type="hidden" name="identifier" value={form.id} />
           {questions.map((question) => (
             <Card key={question.order}>
               <CardContent className="space-y-2 pt-4">
-                <Label htmlFor={question.order}>
-                  {question.question_title}
-                </Label>
+                <div className="flex justify-between py-2">
+                  <Label htmlFor={question.order}>
+                    {question.question_title}
+                  </Label>
+                  <p className="text-[12px] font-medium text-primary">
+                    {question.question_description}
+                  </p>
+                </div>
                 {question.options ? (
                   <RadioGroup
                     key={question.order}
@@ -56,12 +79,9 @@ export default function MainForm({
                     disabled={!publicForm}
                     name={question.order}
                   >
-                    {question.options.map((option) => (
-                      <div
-                        key={option.id}
-                        className="flex items-center space-x-2"
-                      >
-                        <RadioGroupItem value={option || ""} id={option.id} />
+                    {question.options.map((option, index) => (
+                      <div key={index} className="flex items-center space-x-2">
+                        <RadioGroupItem value={option} id={`option-${index}`} />
                         <Label htmlFor={option.id}>{option}</Label>
                       </div>
                     ))}
@@ -70,9 +90,11 @@ export default function MainForm({
                   <Input
                     className="disabled:opacity-100"
                     disabled={!publicForm}
+                    type={attributeTypeToInputType[question.question_type]}
                     name={question.order}
                     id={question.order}
                     placeholder="Type your answer here"
+                    required={question.required}
                   />
                 )}
               </CardContent>
@@ -81,15 +103,12 @@ export default function MainForm({
           {publicForm ? (
             <div className="flex flex-col space-y-2 w-full">
               <div className="flex items-center justify-between">
-                {/* <SubmitButton /> */}
-                <Button
-                  type="button"
-                  className="hover:bg-violet-200/50 text-purple-800 hover:text-purple-800"
-                >
+                <SubmitButton />
+                <Button type="button" variant="ghost">
                   Clear form
                 </Button>
               </div>
-              {/*  */}
+              <p className="text-destructive ml-auto">{state?.error}</p>
             </div>
           ) : (
             <div className="flex items-center justify-center mt-6">
