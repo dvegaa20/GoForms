@@ -36,7 +36,6 @@ export default function AdminPanel() {
           isAdmin: user.admin === true,
         }));
         setUsers(formattedUsers);
-        console.log(users);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
@@ -77,7 +76,6 @@ export default function AdminPanel() {
           user.id === userId ? { ...user, isAdmin: !user.isAdmin } : user
         )
       );
-      console.log(users);
     } catch (error) {
       console.error("Error toggling admin status:", error);
     }
