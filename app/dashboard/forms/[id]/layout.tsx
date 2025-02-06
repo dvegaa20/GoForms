@@ -8,7 +8,7 @@ export default async function FormIdLayout({
   params: { id },
 }: {
   children: React.ReactNode;
-  params: { id: string };
+  params: { id?: string };
 }) {
   const form = (await fetchFormById({ id })) as Form[];
 
