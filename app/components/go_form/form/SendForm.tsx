@@ -19,8 +19,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import LinkTabContent from "./LinkTabContent";
-import QrTabContent from "./QrTabContent";
+import LinkTabContent from "./tabs/LinkTabContent";
+import QrTabContent from "./tabs/QrTabContent";
 
 const tabs = [
   { value: "link", icon: Link2 },
