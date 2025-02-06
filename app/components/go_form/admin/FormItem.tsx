@@ -11,7 +11,7 @@ export default function FormItem({ form, onDelete }) {
       <span>{form.title}</span>
       <div className="space-x-2">
         <Button size="icon" variant="outline">
-          <Link href={`/forms/${form.id}`}>
+          <Link href={`/dashboard/forms/${form.id}`}>
             <Edit className="text-primary h-4 w-4" />
           </Link>
         </Button>
