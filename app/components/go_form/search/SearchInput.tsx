@@ -61,7 +61,7 @@ export default function SearchInput({ forms }: { forms: Form[] }) {
               <CommandItem
                 key={form.id}
                 onSelect={() =>
-                  runCommand(() => router.push(`/dashboard/${form.id}`))
+                  runCommand(() => router.push(`/dashboard/forms/${form.id}`))
                 }
               >
                 {form.title}
