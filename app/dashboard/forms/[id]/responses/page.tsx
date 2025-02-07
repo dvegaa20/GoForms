@@ -1,20 +1,54 @@
 import React from "react";
 import {
-  fetchFormById,
   getQuestions,
   getResponses,
+  processQuestions,
 } from "@/../lib/actions/actions";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import BarChart from "@/components/go_form/form/responses/BarChart";
 
 export default async function ResponsesPage({
-  params: { id },
+  params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const form = await fetchFormById({ id });
-  const responses = await getResponses({ id });
-  const questions = await getQuestions({ id });
+  const { id } = await params;
+  const [responses, formQuestions] = await Promise.all([
+    getResponses({ id }),
+    getQuestions({ id }),
+  ]);
 
-  console.log(questions[0].questions.length);
+  const questions = await processQuestions(formQuestions[0], responses);
 
-  return <div>ResponsesPage</div>;
+  return (
+    <div className="space-y-3.5">
+      {questions.map((question) => (
+        <Card key={question.order}>
+          <CardHeader>
+            <CardTitle className="font-normal text-base">
+              {question.question_title}
+            </CardTitle>
+            <CardDescription className="text-xs">
+              {Object.entries(question.numberOfResponses)
+                .map(([key, value]) => `${value} answered "${key}"`)
+                .join(", ")}
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            {Object.keys(question.numberOfResponses).length > 0 ? (
+              <BarChart responses={question.responses} />
+            ) : (
+              "No responses yet."
+            )}
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  );
 }
