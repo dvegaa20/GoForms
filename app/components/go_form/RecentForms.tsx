@@ -27,10 +27,13 @@ export default function RecentForms() {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="anyone" className="cursor-pointer">
-                Owned by anyone
+                All Forms
               </SelectItem>
               <SelectItem value="me" className="cursor-pointer">
                 Owned by me
+              </SelectItem>
+              <SelectItem value="templates" className="cursor-pointer">
+                Go Forms Templates
               </SelectItem>
             </SelectContent>
           </Select>
