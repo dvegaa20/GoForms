@@ -15,7 +15,7 @@ export default function FormCard({ form }: { form: Form }) {
     <Card>
       <CardHeader>
         <CardTitle className="font-medium">{form.title}</CardTitle>
-        <CardDescription>Description: {form.description}</CardDescription>
+        <CardDescription>{form.description}</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-row items-center justify-between">
         <Button asChild size="sm">
