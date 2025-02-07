@@ -136,34 +136,56 @@ export async function getResponses({ id }) {
 
 export async function getNumberOfResponses(
   responses: any[],
+  formQuestions: any[],
   questionTitle: string
 ) {
+  if (!Array.isArray(responses) || !Array.isArray(formQuestions)) return 0;
+
+  const question = formQuestions.find(
+    (q) => q.question_title === questionTitle
+  );
+  if (!question) return 0;
+
+  const questionKey = question.order.toString();
+
   const attributeCounts = responses
-    .flatMap((response) =>
-      response.formData
-        .filter((item: any) => item.value !== "")
-        .map((item: any) => item.question_title)
-    )
+    .flatMap((response) => {
+      if (!response?.form_data) return [];
+
+      return response.form_data
+        .filter((item: any) => item.key === questionKey && item.value !== "")
+        .map((item: any) => item.value);
+    })
     .reduce(
-      (counts, title) => {
-        counts[title] = (counts[title] || 0) + 1;
+      (counts, value) => {
+        counts[value] = (counts[value] || 0) + 1;
         return counts;
       },
       {} as Record<string, number>
     );
 
-  return attributeCounts[questionTitle] || 0;
+  return attributeCounts;
 }
 
 export async function getIndividualResponses(
   responses: any[],
+  formQuestions: any[],
   questionTitle: string
 ) {
-  const items = responses.flatMap((response) => {
-    const formData = response.formData;
+  if (!Array.isArray(responses) || !Array.isArray(formQuestions)) return [];
 
-    const attribute = formData.find(
-      (item) => item.question_title === questionTitle
+  const question = formQuestions.find(
+    (q) => q.question_title === questionTitle
+  );
+  if (!question) return [];
+
+  const questionKey = question.order.toString();
+
+  const items = responses.flatMap((response) => {
+    if (!response?.form_data) return [];
+
+    const attribute = response.form_data.find(
+      (item) => item.key === questionKey
     );
 
     if (!attribute?.value) return [];
@@ -171,18 +193,14 @@ export async function getIndividualResponses(
     return { ...attribute };
   });
 
-  // Agrupar respuestas similares y contar cuántas veces aparecen
   const groupedItems = items.reduce(
     (counts, item) => {
-      if (!item.value) return counts;
-
       counts[item.value] = (counts[item.value] || 0) + 1;
       return counts;
     },
     {} as Record<string, number>
   );
 
-  // Convertir el objeto en un array de respuestas con su conteo
   return Object.entries(groupedItems).map(([value, count]) => ({
     value,
     count,
@@ -190,10 +208,26 @@ export async function getIndividualResponses(
   }));
 }
 
+export async function processQuestions(formQuestions: any, responses: any) {
+  return Promise.all(
+    formQuestions.questions.map(async (question: any) => ({
+      ...question,
+      numberOfResponses: await getNumberOfResponses(
+        responses,
+        formQuestions.questions,
+        question.question_title
+      ),
+      responses: await getIndividualResponses(
+        responses,
+        formQuestions.questions,
+        question.question_title
+      ),
+    }))
+  );
+}
+
 // Form Actions
 export async function addFormData(prevState: any, formData: FormData) {
-  console.log(formData);
-
   const rawFormData = Object.entries(Object.fromEntries(formData))
     .filter(([key, value]) => !key.startsWith("$ACTION"))
     .map(([key, value]) => ({ key, value }));
