@@ -40,7 +40,7 @@ function ResponsesTabs() {
               value={tab.href}
               className={cn(
                 "flex-col !p-0",
-                isActive ? "!text-violet-900" : "text-neutral-950"
+                isActive ? "!text-blue-900" : "text-neutral-950"
               )}
               asChild
             >
@@ -54,7 +54,7 @@ function ResponsesTabs() {
                 <hr
                   className={cn(
                     "w-full border-b-2 rounded-t-xl",
-                    isActive ? "border-violet-900" : "border-transparent"
+                    isActive ? "border-blue-900" : "border-transparent"
                   )}
                 />
               </div>

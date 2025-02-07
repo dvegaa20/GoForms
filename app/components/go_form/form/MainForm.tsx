@@ -51,7 +51,7 @@ export default function MainForm({
       )}
     >
       <Card>
-        <hr className="w-full border-t-8 rounded-t-xl border-violet-800" />
+        <hr className="w-full border-t-8 rounded-t-xl border-blue-800" />
         <CardHeader className="p-0 space-y-0" />
         <CardTitle className="text-3xl font-medium px-6 py-5">
           {form.title}
@@ -113,7 +113,7 @@ export default function MainForm({
           ) : (
             <div className="flex items-center justify-center mt-6">
               To make any edits, enter&nbsp;
-              <span className="text-purple-800"> edition mode</span>
+              <span className="text-blue-800"> edition mode</span>
             </div>
           )}
         </form>

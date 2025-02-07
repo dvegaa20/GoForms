@@ -42,7 +42,7 @@ export default async function FormIdLayout({
       ) : (
         <>
           <FormPageHeader form={form} />
-          <div className="bg-violet-100 min-h-screen">{children}</div>
+          <div className="bg-blue-100 min-h-screen">{children}</div>
         </>
       )}
     </>

@@ -34,7 +34,7 @@ export default function FormTabs({
               value={tab.href}
               className={cn(
                 `flex-col !p-0`,
-                isActive ? "!text-violet-900" : "text-neutral-950"
+                isActive ? "!text-blue-900" : "text-neutral-950"
               )}
               asChild
             >
@@ -45,12 +45,7 @@ export default function FormTabs({
                 >
                   {tab.title}
                   {tab.href === "responses" && responses > 0 && (
-                    <span
-                      className={cn(
-                        `flex items-center justify-center text-accent rounded-full h-4 w-4 shrink-0 ml-2 text-xs`,
-                        isActive ? "bg-violet-900" : "bg-zinc-700"
-                      )}
-                    >
+                    <span className="flex items-center justify-center text-accent rounded-full h-4 w-4 shrink-0 ml-2 text-xs bg-blue-900">
                       {responses}
                     </span>
                   )}
@@ -58,7 +53,7 @@ export default function FormTabs({
                 <hr
                   className={cn(
                     `w-full border-b-2 rounded-t-xl`,
-                    isActive ? "border-violet-900" : "border-transparent"
+                    isActive ? "border-blue-900" : "border-transparent"
                   )}
                 />
               </div>

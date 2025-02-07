@@ -66,7 +66,7 @@ export default function SendForm() {
                   <TabsTrigger
                     key={value}
                     value={value}
-                    className="flex-col !p-0 group after:content-[''] after:h-[3px] data-[state=active]:text-violet-900 text-neutral-950 data-[state=active]:after:bg-violet-900 after:w-full after:mt-2 after:rounded-t-full"
+                    className="flex-col !p-0 group after:content-[''] after:h-[3px] data-[state=active]:text-blue-900 text-neutral-950 data-[state=active]:after:bg-blue-900 after:w-full after:mt-2 after:rounded-t-full"
                     asChild
                   >
                     <div className="w-16 space-y-1.5 cursor-auto">

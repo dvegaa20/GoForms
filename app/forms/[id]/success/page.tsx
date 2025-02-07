@@ -22,7 +22,7 @@ export default async function FormSuccessPage({
   return (
     <main className="max-w-3xl mx-auto pb-16 pt-8 space-y-3.5">
       <Card>
-        <hr className="w-full border-t-8 rounded-t-xl border-violet-800" />
+        <hr className="w-full border-t-8 rounded-t-xl border-blue-800" />
         <CardHeader className="space-y-4">
           <CardTitle className="text-3xl font-medium">
             {form[0].title}

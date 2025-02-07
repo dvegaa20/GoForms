@@ -23,7 +23,7 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className="bg-violet-100 min-h-screen">
+    <div className="bg-blue-100 min-h-screen">
       {isBlocked ? <BlockedUserDialog isBlocked={isBlocked} /> : children}
     </div>
   );
