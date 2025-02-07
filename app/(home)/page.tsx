@@ -6,11 +6,13 @@ import Features from "@/components/landing/Features";
 import { AuroraBackground } from "@/components/ui/aurora-background";
 import AccessDenied from "@/components/AccessDenied";
 
-export default function LandingPage({
-  searchParams: { error },
+export default async function LandingPage({
+  searchParams,
 }: {
-  searchParams: { error?: string };
+  searchParams: Promise<{ error: string }>;
 }) {
+  const { error } = await searchParams;
+
   return (
     <div className="flex flex-col">
       {error ? (
