@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { MoreVertical } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
@@ -10,9 +9,10 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
+import { useEditingMode } from "@/../store/store";
 
 export function EditingModeMenu() {
-  const [isEditingMode, setIsEditingMode] = useState(false);
+  const { isEditingMode, toggleEditingMode } = useEditingMode();
 
   const handleSwitchClick = (event: React.PointerEvent) => {
     event.preventDefault();
@@ -35,7 +35,7 @@ export function EditingModeMenu() {
           <span>Edition Mode</span>
           <Switch
             checked={isEditingMode}
-            onCheckedChange={setIsEditingMode}
+            onCheckedChange={toggleEditingMode}
             aria-label="Toggle edition mode"
             onPointerDown={handleSwitchClick}
           />

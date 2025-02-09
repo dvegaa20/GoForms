@@ -27,3 +27,14 @@ declare type ErrorResponse = {
   statusCode: number;
   message: string;
 };
+
+declare interface DialogState {
+  isOpen: boolean;
+  open: () => void;
+  close: () => void;
+}
+
+declare interface EditingModeState {
+  isEditingMode: boolean;
+  toggleEditingMode: () => void;
+}

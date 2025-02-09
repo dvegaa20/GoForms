@@ -20,6 +20,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useRouter } from "next/navigation";
 import SubmitButton from "./SubmitButton";
 import Link from "next/link";
+import { useEditingMode } from "@/../store/store";
 
 export default function MainForm({
   form,
@@ -36,6 +37,7 @@ export default function MainForm({
     error: "",
   };
   const [state, formAction] = useActionState(addFormData, initialState);
+  const { isEditingMode } = useEditingMode();
 
   useEffect(() => {
     if (state.success) {
@@ -54,7 +56,15 @@ export default function MainForm({
         <hr className="w-full border-t-8 rounded-t-xl border-blue-800" />
         <CardHeader className="p-0 space-y-0" />
         <CardTitle className="text-3xl font-medium px-6 py-5">
-          {form.title}
+          {isEditingMode ? (
+            <input
+              type="text"
+              defaultValue={form.title}
+              className="border px-2 py-1 rounded w-full"
+            />
+          ) : (
+            form.title
+          )}
         </CardTitle>
       </Card>
 
@@ -64,14 +74,22 @@ export default function MainForm({
           {questions.map((question) => (
             <Card key={question.order}>
               <CardContent className="space-y-2 pt-4">
-                <div className="flex justify-between py-2">
-                  <Label htmlFor={question.order}>
-                    {question.question_title}
-                  </Label>
-                  <p className="text-[12px] font-medium text-primary">
-                    {question.question_description}
-                  </p>
-                </div>
+                {isEditingMode ? (
+                  <input
+                    type="text"
+                    defaultValue={question.question_title}
+                    className="border px-2 py-1 rounded w-full"
+                  />
+                ) : (
+                  <div className="flex justify-between py-2">
+                    <Label htmlFor={question.order}>
+                      {question.question_title}
+                    </Label>
+                    <p className="text-[12px] font-medium text-primary">
+                      {question.question_description}
+                    </p>
+                  </div>
+                )}
                 {question.options ? (
                   <RadioGroup
                     key={question.order}
@@ -82,7 +100,15 @@ export default function MainForm({
                     {question.options.map((option, index) => (
                       <div key={index} className="flex items-center space-x-2">
                         <RadioGroupItem value={option} id={`option-${index}`} />
-                        <Label htmlFor={option.id}>{option}</Label>
+                        {isEditingMode ? (
+                          <input
+                            type="text"
+                            defaultValue={option}
+                            className="border px-2 py-1 rounded w-full"
+                          />
+                        ) : (
+                          <Label htmlFor={option.id}>{option}</Label>
+                        )}
                       </div>
                     ))}
                   </RadioGroup>
