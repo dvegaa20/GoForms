@@ -43,19 +43,6 @@ export default function SendForm() {
           <DialogTitle className="font-normal text-2xl px-4 py-3">
             Send form
           </DialogTitle>
-          <DialogDescription className="bg-gray-100 text-accent-foreground flex justify-between items-center p-4">
-            Collect email addresses
-            <Select defaultValue="do-not-collect">
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Do not collect" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="do-not-collect">Do not collect</SelectItem>
-                <SelectItem value="verified">Verified</SelectItem>
-                <SelectItem value="responder-input">Responder input</SelectItem>
-              </SelectContent>
-            </Select>
-          </DialogDescription>
         </DialogHeader>
         <div>
           <Tabs defaultValue="link" className="p-0">
