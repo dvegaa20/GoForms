@@ -21,7 +21,10 @@ declare interface Question {
   question_title: string;
   question_description?: string;
   options?: string[];
+  required?: boolean;
 }
+
+declare type QuestionType = "text" | "single" | "multiple";
 
 declare type ErrorResponse = {
   statusCode: number;
