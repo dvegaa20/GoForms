@@ -12,3 +12,8 @@ export const useEditingMode = create<EditingModeState>((set) => ({
   toggleEditingMode: () =>
     set((state) => ({ isEditingMode: !state.isEditingMode })),
 }));
+
+export const useFormStore = create<FormState>((set) => ({
+  title: "New Form",
+  setTitle: (title) => set({ title }),
+}));

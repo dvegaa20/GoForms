@@ -10,14 +10,7 @@ declare interface Form {
 
 declare interface Question {
   order: number;
-  question_type:
-    | "integer"
-    | "multiple-choice"
-    | "text"
-    | "number"
-    | "boolean"
-    | "rating"
-    | "email";
+  question_type: "integer" | "radio" | "text" | "number" | "boolean";
   question_title: string;
   question_description?: string;
   options?: string[];
@@ -41,4 +34,9 @@ declare interface EditingModeState {
   isEditingMode: boolean;
   setEditingMode: (value: boolean) => void;
   toggleEditingMode: () => void;
+}
+
+declare interface FormState {
+  title: string;
+  setTitle: (title: string) => void;
 }
