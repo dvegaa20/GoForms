@@ -2,7 +2,7 @@
 
 import { BarChart, Card } from "@tremor/react";
 
-function BarChartComponent({ responses }: { responses: any }) {
+export default function BarChartComponent({ responses }: { responses: any }) {
   return (
     <Card>
       <BarChart
@@ -17,5 +17,3 @@ function BarChartComponent({ responses }: { responses: any }) {
     </Card>
   );
 }
-
-export default BarChartComponent;
