@@ -88,7 +88,7 @@ export async function removeUser(id) {
 
 export async function fetchAllForms() {
   try {
-    return await sql`SELECT * FROM Templates`;
+    return await sql`SELECT * FROM Templates ORDER BY created_at ASC`;
   } catch (error) {
     console.error(error);
   }
@@ -261,6 +261,61 @@ export async function addFormData(prevState: any, formData: FormData) {
     }
 
     return { success: true, formIdentifier };
+  } catch (error) {
+    return { error: error.message };
+  }
+}
+
+export async function updateFormData(prevState: any, formData: FormData) {
+  const rawFormData = Object.entries(Object.fromEntries(formData))
+    .filter(([key, value]) => !key.startsWith("$ACTION"))
+    .map(([key, value]) => ({ key, value }));
+
+  const templateId = rawFormData
+    .find((data) => data.key === "template_id")
+    ?.value.toString();
+  const title = rawFormData
+    .find((data) => data.key === "title")
+    ?.value.toString();
+  const description = rawFormData
+    .find((data) => data.key === "description")
+    ?.value.toString();
+  const topic = rawFormData
+    .find((data) => data.key === "topic")
+    ?.value.toString();
+
+  const questions = JSON.parse(
+    rawFormData.find((data) => data.key === "questions")?.value.toString() ||
+      "[]"
+  );
+
+  if (!templateId) return { error: "Template ID is required." };
+
+  try {
+    await sql`
+      UPDATE templates 
+      SET title = ${title}, description = ${description}, topic = ${topic}, updated_at = NOW()
+      WHERE id = ${templateId}
+    `;
+
+    const existingQuestion = await sql`
+      SELECT id FROM questions WHERE template_id = ${templateId}
+    `;
+
+    if (existingQuestion.length > 0) {
+      await sql`
+        UPDATE questions
+        SET questions = ${JSON.stringify(questions)}, updated_at = NOW()
+        WHERE template_id = ${templateId}
+      `;
+    } else {
+      await sql`
+        INSERT INTO questions (template_id, questions, created_at, updated_at)
+        VALUES (${templateId}, ${JSON.stringify(questions)}, NOW(), NOW())
+      `;
+    }
+
+    return { success: true, templateId };
   } catch (error) {
     return { error: error.message };
   }
