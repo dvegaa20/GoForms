@@ -1,26 +1,28 @@
 "use client";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import React, { useActionState, useEffect } from "react";
-import { cn } from "@/../lib/utils";
+import { useEffect, useState, useActionState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { Reorder } from "framer-motion";
+import { GripVertical, PlusCircle, Trash2 } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { attributeTypeToInputType } from "@/../types/types";
-import { addFormData } from "@/../lib/actions/actions";
-import { FormInputIcon } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { useRouter } from "next/navigation";
-import SubmitButton from "./SubmitButton";
-import Link from "next/link";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { cn } from "@/../lib/utils";
+import { attributeTypeToInputType } from "@/../types/types";
+import { addFormData, updateFormData } from "@/../lib/actions/actions";
 import { useEditingMode } from "@/../store/store";
+import SubmitButton from "./SubmitButton";
+import { toast } from "sonner";
 
 export default function MainForm({
   form,
@@ -32,18 +34,110 @@ export default function MainForm({
   publicForm?: boolean;
 }) {
   const router = useRouter();
-  const questions = formQuestions[0].questions;
-  const initialState = {
-    error: "",
-  };
+  const [questions, setQuestions] = useState<Question[]>(
+    formQuestions[0].questions
+  );
+  const [title, setTitle] = useState(form.title);
+  const initialState = { error: "" };
   const [state, formAction] = useActionState(addFormData, initialState);
-  const { isEditingMode } = useEditingMode();
+  const { isEditingMode, setEditingMode } = useEditingMode();
 
   useEffect(() => {
     if (state.success) {
       router.push(`/forms/${state.formIdentifier}/success`);
     }
   }, [state, router]);
+
+  const handleQuestionChange = (
+    order: number,
+    field: keyof Question,
+    value: string
+  ) => {
+    setQuestions(
+      questions.map((q) => {
+        if (q.order === order) {
+          if (field === "question_type") {
+            return {
+              ...q,
+              [field]: value as Question["question_type"],
+              options: value === "multiple-choice" ? [""] : undefined,
+            };
+          }
+          return { ...q, [field]: value };
+        }
+        return q;
+      })
+    );
+  };
+
+  const handleOptionChange = (order: number, index: number, value: string) => {
+    setQuestions(
+      questions.map((q) => {
+        if (q.order === order && q.options) {
+          const newOptions = [...q.options];
+          newOptions[index] = value;
+          return { ...q, options: newOptions };
+        }
+        return q;
+      })
+    );
+  };
+
+  const handleAddOption = (order: number) => {
+    setQuestions(
+      questions.map((q) => {
+        if (q.order === order && q.options) {
+          return { ...q, options: [...q.options, ""] };
+        }
+        return q;
+      })
+    );
+  };
+
+  const handleRemoveOption = (order: number, index: number) => {
+    setQuestions(
+      questions.map((q) => {
+        if (q.order === order && q.options) {
+          const newOptions = q.options.filter((_, i) => i !== index);
+          return { ...q, options: newOptions.length ? newOptions : [""] };
+        }
+        return q;
+      })
+    );
+  };
+
+  const handleAddQuestion = () => {
+    const newOrder =
+      questions.length > 0 ? Math.max(...questions.map((q) => q.order)) + 1 : 1;
+    setQuestions([
+      ...questions,
+      {
+        order: newOrder,
+        question_type: "text",
+        question_title: "New Question",
+        question_description: "",
+      },
+    ]);
+  };
+
+  const handleRemoveQuestion = (order: number) => {
+    setQuestions(questions.filter((q) => q.order !== order));
+  };
+
+  const handleSubmitUpdate = async () => {
+    const formData = new FormData();
+    formData.append("template_id", form.id);
+    formData.append("title", title);
+    formData.append("description", form.description);
+    formData.append("topic", form.topic);
+    formData.append("questions", JSON.stringify(questions));
+
+    await updateFormData(null, formData);
+
+    setEditingMode(false);
+
+    toast.success("Form updated successfully");
+  };
 
   return (
     <main
@@ -57,75 +151,160 @@ export default function MainForm({
         <CardHeader className="p-0 space-y-0" />
         <CardTitle className="text-3xl font-medium px-6 py-5">
           {isEditingMode ? (
-            <input
+            <Input
               type="text"
-              defaultValue={form.title}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
               className="border px-2 py-1 rounded w-full"
             />
           ) : (
-            form.title
+            title
           )}
         </CardTitle>
       </Card>
 
-      {questions.length > 0 ? (
+      {questions.length > 0 && (
         <form className="space-y-3.5" action={formAction}>
           <input type="hidden" name="identifier" value={form.id} />
-          {questions.map((question) => (
-            <Card key={question.order}>
-              <CardContent className="space-y-2 pt-4">
-                {isEditingMode ? (
-                  <input
-                    type="text"
-                    defaultValue={question.question_title}
-                    className="border px-2 py-1 rounded w-full"
-                  />
-                ) : (
-                  <div className="flex justify-between py-2">
-                    <Label htmlFor={question.order}>
-                      {question.question_title}
-                    </Label>
-                    <p className="text-[12px] font-medium text-primary">
-                      {question.question_description}
-                    </p>
-                  </div>
-                )}
-                {question.options ? (
-                  <RadioGroup
-                    key={question.order}
-                    id={question.order}
-                    disabled={!publicForm}
-                    name={question.order}
-                  >
-                    {question.options.map((option, index) => (
-                      <div key={index} className="flex items-center space-x-2">
-                        <RadioGroupItem value={option} id={`option-${index}`} />
-                        {isEditingMode ? (
-                          <input
-                            type="text"
-                            defaultValue={option}
-                            className="border px-2 py-1 rounded w-full"
-                          />
-                        ) : (
-                          <Label htmlFor={option.id}>{option}</Label>
-                        )}
+          <Reorder.Group values={questions} onReorder={setQuestions}>
+            {questions.map((question) => (
+              <Reorder.Item key={question.order} value={question}>
+                <Card className="my-3">
+                  <CardContent className="space-y-2 pt-4">
+                    {isEditingMode ? (
+                      <div className="flex items-center space-x-2">
+                        <Input
+                          type="text"
+                          value={question.question_title}
+                          onChange={(e) =>
+                            handleQuestionChange(
+                              question.order,
+                              "question_title",
+                              e.target.value
+                            )
+                          }
+                          className="border px-2 py-1 rounded w-full"
+                        />
+                        <Select
+                          value={question.question_type}
+                          onValueChange={(value: Question["question_type"]) =>
+                            handleQuestionChange(
+                              question.order,
+                              "question_type",
+                              value
+                            )
+                          }
+                        >
+                          <SelectTrigger className="w-[180px]">
+                            <SelectValue placeholder="Select question type" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="integer">Integer</SelectItem>
+                            <SelectItem value="text">Text</SelectItem>
+                            <SelectItem value="radio">Options</SelectItem>
+                            <SelectItem value="number">Decimal</SelectItem>
+                            <SelectItem value="boolean">Yes/No</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <Button
+                          type="button"
+                          variant="destructive"
+                          size="sm"
+                          onClick={() => handleRemoveQuestion(question.order)}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                          <span className="sr-only">Remove question</span>
+                        </Button>
+                        <Button type="button" variant="ghost" size="sm">
+                          <GripVertical className="h-5 w-5 text-gray-400 cursor-move" />
+                        </Button>
                       </div>
-                    ))}
-                  </RadioGroup>
-                ) : (
-                  <Input
-                    className="disabled:opacity-100"
-                    disabled={!publicForm}
-                    type={attributeTypeToInputType[question.question_type]}
-                    name={question.order}
-                    id={question.order}
-                    placeholder="Type your answer here"
-                    required={question.required}
-                  />
-                )}
-              </CardContent>
-            </Card>
-          ))}
+                    ) : (
+                      <div className="flex justify-between py-2">
+                        <Label htmlFor={question.order.toString()}>
+                          {question.question_title}
+                        </Label>
+                        <p className="text-[12px] font-medium text-primary">
+                          {question.question_description}
+                        </p>
+                      </div>
+                    )}
+                    {question.question_type === "radio" ? (
+                      <RadioGroup
+                        disabled={!publicForm}
+                        name={question.order.toString()}
+                      >
+                        {question.options?.map((option, index) => (
+                          <div
+                            key={index}
+                            className="flex items-center space-x-2"
+                          >
+                            <RadioGroupItem
+                              value={option}
+                              id={`${question.order}-option-${index}`}
+                            />
+                            {isEditingMode ? (
+                              <div className="flex items-center space-x-2 flex-1">
+                                <Input
+                                  type="text"
+                                  value={option}
+                                  onChange={(e) =>
+                                    handleOptionChange(
+                                      question.order,
+                                      index,
+                                      e.target.value
+                                    )
+                                  }
+                                  className="border px-2 py-1 rounded w-full"
+                                />
+                                <Button
+                                  type="button"
+                                  variant="outline"
+                                  size="icon"
+                                  onClick={() =>
+                                    handleRemoveOption(question.order, index)
+                                  }
+                                  disabled={question.options?.length === 1}
+                                >
+                                  <Trash2 className="h-4 w-4" />
+                                </Button>
+                              </div>
+                            ) : (
+                              <Label
+                                htmlFor={`${question.order}-option-${index}`}
+                              >
+                                {option}
+                              </Label>
+                            )}
+                          </div>
+                        ))}
+                        {isEditingMode && (
+                          <Button
+                            type="button"
+                            variant="outline"
+                            onClick={() => handleAddOption(question.order)}
+                            className="mt-2"
+                          >
+                            Add Option
+                          </Button>
+                        )}
+                      </RadioGroup>
+                    ) : (
+                      <Input
+                        className="disabled:opacity-100"
+                        disabled={!publicForm}
+                        type={attributeTypeToInputType[question.question_type]}
+                        name={question.order.toString()}
+                        id={question.order.toString()}
+                        placeholder="Type your answer here"
+                        required={question.required}
+                      />
+                    )}
+                  </CardContent>
+                </Card>
+              </Reorder.Item>
+            ))}
+          </Reorder.Group>
           {publicForm ? (
             <div className="flex flex-col space-y-2 w-full">
               <div className="flex items-center justify-between">
@@ -137,36 +316,46 @@ export default function MainForm({
               <p className="text-destructive ml-auto">{state?.error}</p>
             </div>
           ) : (
-            <div className="flex items-center justify-center mt-6">
-              To make any edits, enter&nbsp;
-              <span className="text-blue-800"> edition mode</span>
+            <div>
+              {!isEditingMode ? (
+                <div className="flex items-center justify-center mt-6">
+                  To make any changes, enter&nbsp;
+                  <Button variant="link" onClick={() => setEditingMode(true)}>
+                    edition mode
+                  </Button>
+                </div>
+              ) : (
+                <div className="flex items-center justify-between mt-6">
+                  <Button
+                    type="button"
+                    onClick={handleAddQuestion}
+                    size="sm"
+                    className="flex items-center"
+                  >
+                    <PlusCircle className="mr-2 h-4 w-4" /> Add Question
+                  </Button>
+                  <div className="space-x-2">
+                    <Button
+                      type="button"
+                      size="sm"
+                      onClick={handleSubmitUpdate}
+                    >
+                      Save Changes
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="secondary"
+                      size="sm"
+                      onClick={() => setEditingMode(false)}
+                    >
+                      Cancel
+                    </Button>
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </form>
-      ) : (
-        <Card>
-          <CardHeader>
-            <CardTitle>Empty Form</CardTitle>
-            <CardDescription>
-              This form currently has no fields. Please go to the CMS to add
-              fields to this form.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="flex flex-col items-center justify-center space-y-2">
-            <FormInputIcon className="w-12 h-12 text-gray-500" />
-            <p className="text-center text-gray-500">
-              No fields are available in this form.
-            </p>
-          </CardContent>
-          <CardFooter className="flex justify-between">
-            <Button asChild variant="outline">
-              <Link href={`/dashboard`}>Go Back</Link>
-            </Button>
-            <Button asChild>
-              <Link href={`/`}>Go to CMS</Link>
-            </Button>
-          </CardFooter>
-        </Card>
       )}
     </main>
   );
