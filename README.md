@@ -36,4 +36,4 @@ Consulta nuestra [documentación de despliegue de Next.js](https://nextjs.org/do
 
 ---
 
-Deja placeholders donde necesites añadir más detalles, y puedes incluir logos o imágenes según lo desees.
+images
