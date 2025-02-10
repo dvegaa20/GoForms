@@ -27,9 +27,11 @@ import { cn } from "@/../lib/utils";
 import Link from "next/link";
 import { Reorder } from "framer-motion";
 import { attributeTypeToInputType } from "@/../types/types";
+import { useFormStore } from "@/../store/store";
 
 export default function CreateForm() {
-  const [title, setTitle] = useState("New Form");
+  const title = useFormStore((state) => state.title);
+  const setTitle = useFormStore((state) => state.setTitle);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [isEditingMode, setIsEditingMode] = useState(true);
   const router = useRouter();
@@ -110,8 +112,7 @@ export default function CreateForm() {
     setQuestions(questions.filter((q) => q.order !== order));
   };
 
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
+  const handleSubmit = async () => {
     // try {
     //   const response = await fetch("/api/forms", {
     //     method: "POST",
@@ -120,7 +121,6 @@ export default function CreateForm() {
     //     },
     //     body: JSON.stringify({ title, questions }),
     //   });
-
     //   if (response.ok) {
     //     router.push("/dashboard");
     //   } else {
@@ -219,7 +219,7 @@ export default function CreateForm() {
                         </p>
                       </div>
                     )}
-                    {question.question_type === "multiple-choice" ? (
+                    {question.question_type === "radio" ? (
                       <RadioGroup
                         disabled={!isEditingMode}
                         name={question.order.toString()}
@@ -313,7 +313,7 @@ export default function CreateForm() {
             </div>
           ) : (
             <div className="flex items-center justify-center mt-6">
-              To make any edits, enter&nbsp;
+              To make any changes, enter&nbsp;
               <Button variant="link" onClick={() => setIsEditingMode(true)}>
                 edition mode
               </Button>
