@@ -1,5 +1,5 @@
 import { currentUser } from "@clerk/nextjs/server";
-import { fetchUserStatus } from "../../lib/actions/actions";
+import { fetchUserStatus } from "@/../lib/actions";
 import BlockedUserDialog from "@/components/go_form/BlockedUser";
 
 export default async function DashboardLayout({

@@ -18,7 +18,7 @@ import {
   toggleAdminUser,
   removeUser,
   fetchAllForms,
-} from "@/../lib/actions/actions";
+} from "@/../lib/actions";
 import UserList from "@/components/go_form/admin/UserList";
 import FormList from "@/components/go_form/admin/FormList";
 

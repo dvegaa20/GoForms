@@ -1,5 +1,5 @@
 import SearchInput from "./SearchInput";
-import { fetchAllForms } from "@/../lib/actions/actions";
+import { fetchAllForms } from "@/../lib/actions";
 import SearchMobile from "./SearchMobile";
 
 export default async function Search() {

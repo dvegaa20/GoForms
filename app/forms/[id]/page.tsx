@@ -1,4 +1,4 @@
-import { fetchFormById, getQuestions } from "@/../lib/actions/actions";
+import { fetchFormById, getQuestions } from "@/../lib/actions";
 import { notFound } from "next/navigation";
 import MainForm from "@/components/go_form/form/MainForm";
 

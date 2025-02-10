@@ -1,8 +1,4 @@
-import {
-  getQuestions,
-  getResponses,
-  processQuestions,
-} from "@/../lib/actions/actions";
+import { getQuestions, getResponses, processQuestions } from "@/../lib/actions";
 import {
   Card,
   CardContent,

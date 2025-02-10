@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/../lib/utils";
 import { attributeTypeToInputType } from "@/../types/types";
-import { addFormData, updateFormData } from "@/../lib/actions/actions";
+import { addFormData, updateFormData } from "@/../lib/actions";
 import { useEditingMode } from "@/../store/store";
 import SubmitButton from "./SubmitButton";
 import { toast } from "sonner";
@@ -320,9 +320,12 @@ export default function MainForm({
               {!isEditingMode ? (
                 <div className="flex items-center justify-center mt-6">
                   To make any changes, enter&nbsp;
-                  <Button variant="link" onClick={() => setEditingMode(true)}>
+                  <span
+                    className="text-blue-600 cursor-pointer underline underline-offset-2"
+                    onClick={() => setEditingMode(true)}
+                  >
                     edition mode
-                  </Button>
+                  </span>
                 </div>
               ) : (
                 <div className="flex items-center justify-between mt-6">

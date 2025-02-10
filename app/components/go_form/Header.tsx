@@ -4,7 +4,7 @@ import Search from "./search/Search";
 import AdminPanel from "./admin/AdminPanel";
 import { UserButton } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
-import { fetchUserAdminStatus } from "@/../lib/actions/actions";
+import { fetchUserAdminStatus } from "@/../lib/actions";
 
 export default async function Header() {
   const user = await currentUser();

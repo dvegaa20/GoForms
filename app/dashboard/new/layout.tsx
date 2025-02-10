@@ -1,4 +1,4 @@
-import { fetchUserStatus } from "@/../lib/actions/actions";
+import { fetchUserStatus } from "@/../lib/actions";
 import { currentUser } from "@clerk/nextjs/server";
 import BlockedUserDialog from "@/components/go_form/BlockedUser";
 import CreateNewFormHeader from "@/components/go_form/form/new/CreateNewFormHeader";
