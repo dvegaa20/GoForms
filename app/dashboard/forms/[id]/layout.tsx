@@ -1,4 +1,3 @@
-import React from "react";
 import { notFound } from "next/navigation";
 import { fetchFormById, fetchUserStatus } from "@/../lib/actions/actions";
 import { currentUser } from "@clerk/nextjs/server";

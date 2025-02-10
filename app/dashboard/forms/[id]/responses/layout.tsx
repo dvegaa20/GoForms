@@ -1,5 +1,4 @@
 import ResponsesHeader from "@/components/go_form/form/responses/ResponsesHeader";
-import React from "react";
 
 export default async function ResponsesLayout({
   children,

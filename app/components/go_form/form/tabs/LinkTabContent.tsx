@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { useParams } from "next/navigation";
 import { TabsContent } from "@/components/ui/tabs";
 import { Label } from "@/components/ui/label";

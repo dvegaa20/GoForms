@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import React from "react";
 
 import { cn } from "@/../lib/utils";
 import { Toaster } from "./components/ui/sonner";

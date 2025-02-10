@@ -1,4 +1,3 @@
-import React from "react";
 import { getResponses } from "@/../lib/actions/actions";
 import FormTabs from "./FormTabs";
 

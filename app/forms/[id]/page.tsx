@@ -1,4 +1,3 @@
-import React from "react";
 import { fetchFormById, getQuestions } from "@/../lib/actions/actions";
 import { notFound } from "next/navigation";
 import MainForm from "@/components/go_form/form/MainForm";

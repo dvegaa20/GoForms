@@ -1,7 +1,5 @@
 import { Layers } from "lucide-react";
 import Link from "next/link";
-import React from "react";
-import SendForm from "../SendForm";
 import { UserButton } from "@clerk/nextjs";
 
 export default function CreateNewFormHeader() {

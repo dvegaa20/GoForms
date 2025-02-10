@@ -1,4 +1,3 @@
-import React from "react";
 import { getResponses } from "@/../lib/actions/actions";
 import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import ResponsesTab from "@/components/go_form/form/tabs/ResponsesTab";

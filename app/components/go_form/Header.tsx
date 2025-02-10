@@ -1,5 +1,4 @@
 import Link from "next/link";
-import React from "react";
 import { Layers } from "lucide-react";
 import Search from "./search/Search";
 import AdminPanel from "./admin/AdminPanel";

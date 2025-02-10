@@ -1,6 +1,5 @@
 import Header from "@/components/go_form/Header";
 import RecentForms from "@/components/go_form/RecentForms";
-import React from "react";
 
 export default async function DashboardPage() {
   return (

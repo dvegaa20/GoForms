@@ -8,7 +8,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Link from "next/link";
-import React from "react";
 
 export default function FormCard({ form }: { form: Form }) {
   return (

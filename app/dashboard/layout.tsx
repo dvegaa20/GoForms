@@ -1,4 +1,3 @@
-import React from "react";
 import { currentUser } from "@clerk/nextjs/server";
 import { fetchUserStatus } from "../../lib/actions/actions";
 import BlockedUserDialog from "@/components/go_form/BlockedUser";

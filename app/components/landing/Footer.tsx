@@ -1,5 +1,4 @@
 import Link from "next/link";
-import React from "react";
 import { BackgroundBeamsWithCollision } from "../ui/background-beams-with-collision";
 
 export default function Footer() {

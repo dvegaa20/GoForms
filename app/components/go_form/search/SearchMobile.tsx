@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { SearchIcon } from "lucide-react";
 import { useDialogStore } from "@/../store/store";
 

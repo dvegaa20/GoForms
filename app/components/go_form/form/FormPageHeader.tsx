@@ -1,7 +1,6 @@
 import { UserButton } from "@clerk/nextjs";
 import { Layers } from "lucide-react";
 import Link from "next/link";
-import React from "react";
 import SendForm from "./SendForm";
 import FormPageHeaderBottom from "./FormPageHeaderBottom";
 import { EditingModeMenu } from "./EditingModeMenu";
