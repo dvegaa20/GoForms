@@ -10,9 +10,22 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { useEditingMode } from "@/../store/store";
+import { toast } from "sonner";
+import { useEffect, useState } from "react";
 
 export function EditingModeMenu() {
   const { isEditingMode, toggleEditingMode } = useEditingMode();
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    if (hasMounted) {
+      toast.warning(
+        `Edition mode is ${isEditingMode ? "enabled" : "disabled"}`
+      );
+    } else {
+      setHasMounted(true);
+    }
+  }, [isEditingMode, hasMounted]);
 
   const handleSwitchClick = (event: React.PointerEvent) => {
     event.preventDefault();
