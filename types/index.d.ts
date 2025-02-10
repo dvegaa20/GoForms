@@ -39,5 +39,6 @@ declare interface DialogState {
 
 declare interface EditingModeState {
   isEditingMode: boolean;
+  setEditingMode: (value: boolean) => void;
   toggleEditingMode: () => void;
 }

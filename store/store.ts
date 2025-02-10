@@ -8,6 +8,7 @@ export const useDialogStore = create<DialogState>((set) => ({
 
 export const useEditingMode = create<EditingModeState>((set) => ({
   isEditingMode: false,
+  setEditingMode: (value) => set({ isEditingMode: value }),
   toggleEditingMode: () =>
     set((state) => ({ isEditingMode: !state.isEditingMode })),
 }));
