@@ -14,7 +14,7 @@ export default function RecentForms() {
   return (
     <section className="p-4 space-y-4 pt-8">
       <div className="flex justify-between items-center">
-        <div className="bg-primary rounded-md px-4">
+        <div className="bg-primary rounded-md px-4 py-1">
           <p className="text-xl text-white font-medium">Your Forms</p>
         </div>
         <div className="flex items-center gap-x-2">
