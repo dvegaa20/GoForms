@@ -31,7 +31,9 @@ export default async function NewFormLayout({
       ) : (
         <>
           <CreateNewFormHeader />
-          <div className="bg-blue-100 min-h-screen">{children}</div>
+          <div className="bg-blue-100 dark:bg-gray-900 min-h-screen">
+            {children}
+          </div>
         </>
       )}
     </>

@@ -3,20 +3,12 @@
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Link2, Send, QrCode } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import LinkTabContent from "./tabs/LinkTabContent";
 import QrTabContent from "./tabs/QrTabContent";
@@ -52,7 +44,7 @@ export default function SendForm() {
                   <TabsTrigger
                     key={value}
                     value={value}
-                    className="flex-col !p-0 group after:content-[''] after:h-[3px] data-[state=active]:text-blue-900 text-neutral-950 data-[state=active]:after:bg-blue-900 after:w-full after:mt-2 after:rounded-t-full"
+                    className="flex-col !p-0 group after:content-[''] after:h-[3px] data-[state=active]:text-blue-600 text-neutral-950 dark:data-[state=inactive]:text-white data-[state=active]:after:bg-blue-600 after:w-full after:mt-2 after:rounded-t-full"
                     asChild
                   >
                     <div className="w-16 space-y-1.5 cursor-auto">

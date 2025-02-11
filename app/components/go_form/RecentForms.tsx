@@ -24,7 +24,7 @@ export default function RecentForms() {
             </Button>
           </Link>
           <Select defaultValue="anyone">
-            <SelectTrigger className="w-[200px] bg-white border border-gray-200 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <SelectTrigger className="w-[200px] border border-gray-200 rounded-md shadow-sm">
               <SelectValue placeholder="Owned by anyone" />
             </SelectTrigger>
             <SelectContent>

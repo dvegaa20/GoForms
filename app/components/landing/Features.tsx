@@ -8,7 +8,7 @@ export default function Features() {
       id="features"
     >
       <div className="container px-4 md:px-6 flex flex-col items-center max-w-5xl">
-        <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">
+        <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12 dark:text-gray-200">
           Features
         </h2>
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-5xl">

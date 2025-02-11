@@ -9,7 +9,7 @@ export default function Cta() {
     >
       <div className="container px-4 md:px-6 flex flex-col items-center text-center max-w-5xl">
         <div className="space-y-4 max-w-3xl">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl dark:text-gray-200">
             Ready to Create Amazing Forms?
           </h2>
           <p className="mx-auto max-w-[600px] text-gray-500 md:text-xl dark:text-gray-400">
