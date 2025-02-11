@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
-import { fetchFormById, fetchUserStatus } from "@/../lib/actions";
+import { fetchUserStatus } from "@/../lib/actions/user_actions";
+import { fetchFormById } from "@/../lib/actions/form_actions";
 import { currentUser } from "@clerk/nextjs/server";
 import FormPageHeader from "@/components/go_form/form/FormPageHeader";
 import BlockedUserDialog from "@/components/go_form/BlockedUser";

@@ -4,7 +4,7 @@ import Search from "./search/Search";
 import AdminPanel from "./admin/AdminPanel";
 import { UserButton } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
-import { fetchUserAdminStatus } from "@/../lib/actions";
+import { fetchUserAdminStatus } from "@/../lib/actions/user_actions";
 import { ModeToggle } from "../ModeToggle";
 
 export default async function Header() {

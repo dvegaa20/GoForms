@@ -1,4 +1,4 @@
-import { getResponses } from "@/../lib/actions";
+import { getResponses } from "@/../lib/actions/form_actions";
 import FormTabs from "./FormTabs";
 
 export default async function FormPageHeaderBottom({ form }: { form: Form[] }) {

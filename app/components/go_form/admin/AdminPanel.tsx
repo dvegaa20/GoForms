@@ -17,8 +17,8 @@ import {
   toggleBlockUser,
   toggleAdminUser,
   removeUser,
-  fetchAllForms,
-} from "@/../lib/actions";
+} from "@/../lib/actions/user_actions";
+import { fetchAllForms } from "@/../lib/actions/form_actions";
 import UserList from "@/components/go_form/admin/UserList";
 import FormList from "@/components/go_form/admin/FormList";
 

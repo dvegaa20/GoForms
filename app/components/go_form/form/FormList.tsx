@@ -1,4 +1,4 @@
-import { fetchAllForms } from "@/../lib/actions";
+import { fetchAllForms } from "@/../lib/actions/form_actions";
 import FormCard from "./FormCard";
 
 export default async function FormList() {

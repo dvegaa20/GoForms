@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/../lib/utils";
 import { attributeTypeToInputType } from "@/../types/types";
-import { addFormData, updateFormData } from "@/../lib/actions";
+import { addFormData, updateFormData } from "@/../lib/actions/form_actions";
 import { useEditingMode } from "@/../store/store";
 import SubmitButton from "./SubmitButton";
 import { toast } from "sonner";
