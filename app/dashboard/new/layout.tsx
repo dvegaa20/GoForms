@@ -1,28 +1,13 @@
-import { fetchUserStatus } from "@/../lib/actions/user_actions";
-import { currentUser } from "@clerk/nextjs/server";
 import BlockedUserDialog from "@/components/go_form/BlockedUser";
 import CreateNewFormHeader from "@/components/go_form/form/new/CreateNewFormHeader";
+import { getUserStatus } from "@/../lib/auth";
 
 export default async function NewFormLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const { emailAddresses } = await currentUser();
-
-  let isBlocked = false;
-
-  try {
-    const status = await fetchUserStatus({
-      email: emailAddresses[0].emailAddress,
-    });
-
-    if (status[0].status === "blocked") {
-      isBlocked = true;
-    }
-  } catch (error) {
-    console.error(error);
-  }
+  const { isBlocked } = await getUserStatus();
 
   return (
     <>
