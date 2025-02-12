@@ -17,3 +17,8 @@ export const useFormStore = create<FormState>((set) => ({
   title: "New Form",
   setTitle: (title) => set({ title }),
 }));
+
+export const useFormOrTemplateStore = create<FormStore>((set) => ({
+  selectedOption: "me",
+  setSelectedOption: (option) => set({ selectedOption: option }),
+}));

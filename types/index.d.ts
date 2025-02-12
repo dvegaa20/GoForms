@@ -40,3 +40,8 @@ declare interface FormState {
   title: string;
   setTitle: (title: string) => void;
 }
+
+declare interface FormStore {
+  selectedOption: string;
+  setSelectedOption: (option: string) => void;
+}

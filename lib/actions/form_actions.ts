@@ -1,14 +1,22 @@
 "use server";
 
+import { currentUser } from "@clerk/nextjs/server";
 import { neon } from "@neondatabase/serverless";
 
 const sql = neon(process.env.DATABASE_URL);
 
 // Form Fetching
-
-export async function fetchAllForms() {
+export async function fetchForms({ selectedOption }) {
   try {
-    return await sql`SELECT * FROM Templates ORDER BY created_at ASC`;
+    if (selectedOption === "me") {
+      const user = await currentUser();
+      return await sql`SELECT * FROM Forms
+      WHERE created_by = ${user.id}
+      ORDER BY created_at ASC`;
+    }
+    if (selectedOption === "templates") {
+      return await sql`SELECT * FROM Templates ORDER BY created_at ASC`;
+    }
   } catch (error) {
     console.error(error);
   }
@@ -238,5 +246,37 @@ export async function updateFormData(prevState: any, formData: FormData) {
     return { success: true, templateId };
   } catch (error) {
     return { error: error.message };
+  }
+}
+
+export async function createForm(
+  title: string,
+  description: string,
+  topic: string,
+  questions: Question[]
+) {
+  try {
+    const user = await currentUser();
+
+    const formInsert = await sql`
+      INSERT INTO forms (title, description, topic, created_by, created_at, updated_at)
+      VALUES (${title}, ${description}, ${topic}, ${user.id}, NOW(), NOW())
+      RETURNING id
+    `;
+
+    const formId = formInsert[0]?.id;
+    if (!formId) throw new Error("Error creating form");
+
+    if (questions.length > 0) {
+      await sql`
+        INSERT INTO questions (form_id, questions, created_at, updated_at)
+        VALUES (${formId}, ${JSON.stringify(questions)}, NOW(), NOW())
+      `;
+    }
+
+    return { success: true, formId };
+  } catch (error) {
+    console.error("Error creating form:", error);
+    return { success: false, error };
   }
 }
