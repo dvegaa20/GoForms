@@ -3,7 +3,7 @@
 import type React from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { PlusCircle, Trash2, FormInputIcon, GripVertical } from "lucide-react";
+import { PlusCircle, Trash2, GripVertical, FormInputIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -25,13 +25,16 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { cn } from "@/../lib/utils";
 import Link from "next/link";
-import { Reorder } from "framer-motion";
 import { attributeTypeToInputType } from "@/../types/types";
+import { Reorder } from "framer-motion";
 import { useFormStore } from "@/../store/store";
+import { createForm } from "@/../lib/actions/form_actions";
 
 export default function CreateForm() {
   const title = useFormStore((state) => state.title);
   const setTitle = useFormStore((state) => state.setTitle);
+  const [description, setDescription] = useState("");
+  const [topic, setTopic] = useState("");
   const [questions, setQuestions] = useState<Question[]>([]);
   const [isEditingMode, setIsEditingMode] = useState(true);
   const router = useRouter();
@@ -48,7 +51,7 @@ export default function CreateForm() {
             return {
               ...q,
               [field]: value as Question["question_type"],
-              options: value === "multiple-choice" ? [""] : undefined,
+              options: value === "radio" ? [""] : undefined,
             };
           }
           return { ...q, [field]: value };
@@ -103,7 +106,7 @@ export default function CreateForm() {
         order: newOrder,
         question_type: "text",
         question_title: "New Question",
-        question_description: "",
+        question_description: "Enter your response here",
       },
     ]);
   };
@@ -112,23 +115,10 @@ export default function CreateForm() {
     setQuestions(questions.filter((q) => q.order !== order));
   };
 
-  const handleSubmit = async () => {
-    // try {
-    //   const response = await fetch("/api/forms", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({ title, questions }),
-    //   });
-    //   if (response.ok) {
-    //     router.push("/dashboard");
-    //   } else {
-    //     throw new Error("Failed to create form");
-    //   }
-    // } catch (error) {
-    //   console.error("Error creating form:", error);
-    // }
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await createForm(title, description, topic, questions);
+    router.push("/dashboard");
   };
 
   return (
@@ -140,12 +130,34 @@ export default function CreateForm() {
         <CardHeader className="p-0 space-y-0" />
         <CardTitle className="text-3xl font-medium px-6 py-5">
           {isEditingMode ? (
-            <Input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className="border px-2 py-1 rounded w-full"
-            />
+            <div>
+              <Input
+                type="text"
+                value={title}
+                placeholder="Give your form a title"
+                onChange={(e) => setTitle(e.target.value)}
+                required
+                className="border px-2 py-1 rounded w-full"
+              />
+              <div className="flex items-center space-x-2 pt-4">
+                <Input
+                  type="text"
+                  value={description}
+                  placeholder="Give your form a description"
+                  onChange={(e) => setDescription(e.target.value)}
+                  required
+                  className="border px-2 py-1 rounded w-full"
+                />
+                <Input
+                  type="text"
+                  value={topic}
+                  placeholder="Give your form a topic"
+                  onChange={(e) => setTopic(e.target.value)}
+                  required
+                  className="border px-2 py-1 rounded w-48"
+                />
+              </div>
+            </div>
           ) : (
             title
           )}
@@ -164,6 +176,7 @@ export default function CreateForm() {
                         <Input
                           type="text"
                           value={question.question_title}
+                          placeholder="Enter your question here"
                           onChange={(e) =>
                             handleQuestionChange(
                               question.order,
@@ -179,7 +192,7 @@ export default function CreateForm() {
                             handleQuestionChange(
                               question.order,
                               "question_type",
-                              value
+                              value as Question["question_type"]
                             )
                           }
                         >
@@ -188,7 +201,7 @@ export default function CreateForm() {
                           </SelectTrigger>
                           <SelectContent>
                             <SelectItem value="text">Text</SelectItem>
-                            <SelectItem value="multiple-choice">
+                            <SelectItem value="radio">
                               Multiple Choice
                             </SelectItem>
                             <SelectItem value="number">Number</SelectItem>
@@ -215,7 +228,7 @@ export default function CreateForm() {
                           {question.question_title}
                         </Label>
                         <p className="text-[12px] font-medium text-primary">
-                          {question.question_type}
+                          {question.question_description}
                         </p>
                       </div>
                     )}
@@ -283,15 +296,43 @@ export default function CreateForm() {
                           </Button>
                         )}
                       </RadioGroup>
+                    ) : isEditingMode ? (
+                      <div>
+                        <Input
+                          type="text"
+                          value={question.question_description}
+                          placeholder="Enter a small description for this question"
+                          onChange={(e) => {
+                            handleQuestionChange(
+                              question.order,
+                              "question_description",
+                              e.target.value
+                            );
+                          }}
+                          className="border px-2 py-1 rounded w-full"
+                        />
+                        <Input
+                          type={
+                            attributeTypeToInputType[question.question_type] ||
+                            "text"
+                          }
+                          placeholder="User's response here"
+                          disabled
+                          className="border px-2 py-1 rounded w-full mt-2"
+                        />
+                      </div>
                     ) : (
-                      <Input
-                        className="disabled:opacity-100"
-                        disabled={!isEditingMode}
-                        type={attributeTypeToInputType[question.question_type]}
-                        name={question.order.toString()}
-                        id={question.order.toString()}
-                        placeholder="Type your answer here"
-                      />
+                      <>
+                        <Input
+                          type={
+                            attributeTypeToInputType[question.question_type] ||
+                            "text"
+                          }
+                          placeholder="Enter your response ot this question"
+                          disabled
+                          className="border px-2 py-1 rounded w-full mt-2"
+                        />
+                      </>
                     )}
                   </CardContent>
                 </Card>
@@ -313,7 +354,7 @@ export default function CreateForm() {
             </div>
           ) : (
             <div className="flex items-center justify-center mt-6">
-              To make any changes, enter&nbsp;
+              To make any edits, enter&nbsp;
               <Button variant="link" onClick={() => setIsEditingMode(true)}>
                 edition mode
               </Button>

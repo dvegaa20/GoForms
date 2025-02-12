@@ -8,14 +8,14 @@ export const attributeTypeToInputType: Record<string, HTMLInputTypeAttribute> =
     integer: "number",
     real: "number",
     float: "number",
+    boolean: "checkbox",
     dateAndTime: "datetime-local",
     date: "date",
     time: "time",
     file: "file",
     image: "file",
     groupOfImages: "file",
-    list: "radio",
-    button: "button",
+    radio: "radio",
   };
 
 export type FormDataItem = {
