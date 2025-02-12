@@ -18,13 +18,14 @@ import {
   toggleAdminUser,
   removeUser,
 } from "@/../lib/actions/user_actions";
-import { fetchAllForms } from "@/../lib/actions/form_actions";
 import UserList from "@/components/go_form/admin/UserList";
 import FormList from "@/components/go_form/admin/FormList";
+import { useForms } from "@/../hooks/useForm";
 
 export default function AdminPanel() {
   const [users, setUsers] = useState([]);
-  const [forms, setForms] = useState([]);
+
+  const forms = useForms();
 
   useEffect(() => {
     const loadUsers = async () => {
@@ -41,18 +42,6 @@ export default function AdminPanel() {
       }
     };
     loadUsers();
-  }, []);
-
-  useEffect(() => {
-    const loadForms = async () => {
-      try {
-        const formsData = await fetchAllForms();
-        setForms(formsData);
-      } catch (error) {
-        console.error("Error fetching forms:", error);
-      }
-    };
-    loadForms();
   }, []);
 
   const handleToggleBlock = async (userId) => {

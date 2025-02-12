@@ -1,10 +1,11 @@
+"use client";
+
 import SearchInput from "./SearchInput";
-import { fetchAllForms } from "../../../../lib/actions/form_actions";
 import SearchMobile from "./SearchMobile";
+import { useForms } from "@/../hooks/useForm";
 
-export default async function Search() {
-  const forms = (await fetchAllForms()) as Form[];
-
+export default function Search() {
+  const forms = useForms();
   return (
     <>
       <SearchInput forms={forms} />
