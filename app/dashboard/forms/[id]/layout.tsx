@@ -15,7 +15,6 @@ export default async function FormIdLayout({
   const { id } = await params;
   const { isBlocked } = await getUserStatus();
   const selectedOption = (await cookies()).get("selectedOption")?.value;
-  console.log(selectedOption);
 
   const form = (await fetchFormById({ id, selectedOption })) as Form[];
 

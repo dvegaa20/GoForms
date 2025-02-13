@@ -14,7 +14,6 @@ export default async function FormSuccessPage({
   params: { id: string };
 }) {
   const selectedOption = (await cookies()).get("selectedOption")?.value;
-  console.log(selectedOption);
   const form = (await fetchFormById({ id, selectedOption })) as Form[];
 
   if (!form) {

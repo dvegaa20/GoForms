@@ -15,5 +15,5 @@ export function useForms() {
     fetchData();
   }, [selectedOption]);
 
-  return forms;
+  return { forms, setForms };
 }
