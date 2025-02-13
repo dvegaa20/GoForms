@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { setCookie } from "cookies-next";
 
 export const useDialogStore = create<DialogState>((set) => ({
   isOpen: false,
@@ -20,5 +21,8 @@ export const useFormStore = create<FormState>((set) => ({
 
 export const useFormOrTemplateStore = create<FormStore>((set) => ({
   selectedOption: "me",
-  setSelectedOption: (option) => set({ selectedOption: option }),
+  setSelectedOption: (option) => {
+    set({ selectedOption: option });
+    setCookie("selectedOption", option);
+  },
 }));
