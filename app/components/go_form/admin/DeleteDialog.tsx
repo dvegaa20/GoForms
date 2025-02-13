@@ -25,7 +25,7 @@ export default function DeleteDialog({
   const [open, setOpen] = useState(false);
 
   const handleConfirmDelete = () => {
-    onDelete(user.id);
+    onDelete(user ? user.id : form.id);
     toast.success(
       `${user ? `${user.first_name} ${user.last_name}` : form.title} has been deleted`
     );
