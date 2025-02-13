@@ -29,6 +29,7 @@ import { attributeTypeToInputType } from "@/../types/types";
 import { Reorder } from "framer-motion";
 import { useFormStore } from "@/../store/store";
 import { createForm } from "@/../lib/actions/form_actions";
+import { toast } from "sonner";
 
 export default function CreateForm() {
   const title = useFormStore((state) => state.title);
@@ -342,7 +343,14 @@ export default function CreateForm() {
           {isEditingMode ? (
             <div className="flex flex-col space-y-2 w-full">
               <div className="flex items-center justify-between">
-                <Button type="submit">Save Form</Button>
+                <Button
+                  type="submit"
+                  onClick={() =>
+                    toast.success(`Form has been saved successfully`)
+                  }
+                >
+                  Save Form
+                </Button>
                 <Button
                   type="button"
                   variant="outline"
