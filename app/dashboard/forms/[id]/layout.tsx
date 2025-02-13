@@ -3,6 +3,7 @@ import { fetchFormById } from "@/../lib/actions/form_actions";
 import FormPageHeader from "@/components/go_form/form/FormPageHeader";
 import BlockedUserDialog from "@/components/go_form/BlockedUser";
 import { getUserStatus } from "@/../lib/auth";
+import { cookies } from "next/headers";
 
 export default async function FormIdLayout({
   children,
@@ -13,8 +14,10 @@ export default async function FormIdLayout({
 }) {
   const { id } = await params;
   const { isBlocked } = await getUserStatus();
+  const selectedOption = (await cookies()).get("selectedOption")?.value;
+  console.log(selectedOption);
 
-  const form = (await fetchFormById({ id })) as Form[];
+  const form = (await fetchFormById({ id, selectedOption })) as Form[];
 
   if (!form) {
     notFound();
