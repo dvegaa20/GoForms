@@ -22,31 +22,29 @@ export async function fetchForms({ selectedOption }) {
   }
 }
 
-export async function fetchFormById({ id }) {
+export async function fetchFormById({ id, selectedOption }) {
   try {
-    return await sql`SELECT * FROM Templates WHERE id = ${id}`;
+    if (selectedOption === "me") {
+      return await sql`SELECT * FROM Forms WHERE id = ${id}`;
+    } else if (selectedOption === "templates") {
+      return await sql`SELECT * FROM Templates WHERE id = ${id}`;
+    }
   } catch (error) {
     console.error(error);
   }
 }
 
-export async function fetchAllFormsData({ id }) {
+export async function getQuestions({ id, selectedOption }) {
   try {
-    return await sql`SELECT t.title, q.questions, f.responses
-      FROM templates t
-      JOIN questions q ON t.id = q.template_id
-      JOIN forms f ON t.id = f.template_id
-      WHERE t.id = ${id}`;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-export async function getQuestions({ id }) {
-  try {
-    return await sql`SELECT questions 
+    if (selectedOption === "me") {
+      return await sql`SELECT questions 
+      FROM questions 
+      WHERE form_id = ${id}`;
+    } else if (selectedOption === "templates") {
+      return await sql`SELECT questions 
       FROM questions 
       WHERE template_id = ${id}`;
+    }
   } catch (error) {
     console.error(error);
   }
