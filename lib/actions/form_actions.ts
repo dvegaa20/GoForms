@@ -278,3 +278,15 @@ export async function createForm(
     return { success: false, error };
   }
 }
+
+export async function removeForm(id, selectedOption) {
+  try {
+    if (selectedOption === "me") {
+      await sql`DELETE FROM Forms WHERE id = ${id}`;
+    } else if (selectedOption === "templates") {
+      await sql`DELETE FROM Templates WHERE id = ${id}`;
+    }
+  } catch (error) {
+    console.error("Error deleting form:", error);
+  }
+}
