@@ -21,11 +21,13 @@ import {
 import UserList from "@/components/go_form/admin/UserList";
 import FormList from "@/components/go_form/admin/FormList";
 import { useForms } from "@/../hooks/useForm";
+import { removeForm } from "@/../lib/actions/form_actions";
+import { useFormOrTemplateStore } from "@/../store/store";
 
 export default function AdminPanel() {
   const [users, setUsers] = useState([]);
-
-  const forms = useForms();
+  const { selectedOption } = useFormOrTemplateStore();
+  const { forms, setForms } = useForms();
 
   useEffect(() => {
     const loadUsers = async () => {
@@ -79,6 +81,16 @@ export default function AdminPanel() {
     }
   };
 
+  const handleDeleteForm = async (formId) => {
+    try {
+      await removeForm(formId, selectedOption);
+      setForms((prevForms) => prevForms.filter((form) => form.id !== formId));
+      window.location.reload();
+    } catch (error) {
+      console.error("Error deleting form:", error);
+    }
+  };
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -107,7 +119,7 @@ export default function AdminPanel() {
             />
           </TabsContent>
           <TabsContent value="forms" className="pt-2">
-            <FormList forms={forms} onDelete={handleDeleteUser} />
+            <FormList forms={forms} onDelete={handleDeleteForm} />
           </TabsContent>
         </Tabs>
       </SheetContent>
