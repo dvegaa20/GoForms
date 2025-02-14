@@ -13,7 +13,7 @@ export default function UserItem({
 }) {
   return (
     <div className="flex items-center justify-between p-2 border rounded">
-      <span>{`${user.first_name} ${user.last_name}`}</span>
+      <span className="truncate flex-1 max-w-[160px]">{`${user.first_name} ${user.last_name}`}</span>
       <div className="space-x-2">
         <Button
           size="icon"

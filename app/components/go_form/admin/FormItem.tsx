@@ -8,7 +8,7 @@ import DeleteDialog from "./DeleteDialog";
 export default function FormItem({ form, onDelete }) {
   return (
     <div className="flex items-center justify-between p-2 border rounded">
-      <span>{form.title}</span>
+      <span className="truncate flex-1 max-w-[200px]">{form.title}</span>
       <div className="space-x-2">
         <Button size="icon" variant="outline">
           <Link href={`/dashboard/forms/${form.id}`}>
