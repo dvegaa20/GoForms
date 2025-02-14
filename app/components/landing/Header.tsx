@@ -15,18 +15,20 @@ export default function Header() {
             <span className="ml-2 text-xl font-bold">GoForms</span>
           </Link>
           <nav className="flex items-center gap-4 sm:gap-6">
-            <Link
-              className="text-sm font-medium hover:text-primary transition-colors"
-              href="#features"
-            >
-              Features
-            </Link>
-            <Link
-              className="text-sm font-medium hover:text-primary transition-colors"
-              href="#cta"
-            >
-              Let's Get Started
-            </Link>
+            <div className="hidden sm:flex items-center gap-4 sm:gap-6">
+              <Link
+                className="text-sm font-medium hover:text-primary transition-colors"
+                href="#features"
+              >
+                Features
+              </Link>
+              <Link
+                className="text-sm font-medium hover:text-primary transition-colors"
+                href="#cta"
+              >
+                Let's Get Started
+              </Link>
+            </div>
             <SignedOut>
               <Button asChild>
                 <SignInButton mode="modal" forceRedirectUrl="/dashboard" />
