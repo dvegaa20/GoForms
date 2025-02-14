@@ -2,9 +2,14 @@
 
 import { useEffect, useState, useActionState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { Reorder } from "framer-motion";
-import { GripVertical, PlusCircle, Trash2 } from "lucide-react";
+import {
+  Copy,
+  GripVertical,
+  MoreVertical,
+  PlusCircle,
+  Trash2,
+} from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -19,10 +24,15 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/../lib/utils";
 import { attributeTypeToInputType } from "@/../types/types";
-import { addFormData, updateFormData } from "@/../lib/actions/form_actions";
+import {
+  addFormData,
+  createForm,
+  updateFormData,
+} from "@/../lib/actions/form_actions";
 import { useEditingMode } from "@/../store/store";
 import SubmitButton from "./SubmitButton";
 import { toast } from "sonner";
+import { Separator } from "@radix-ui/react-select";
 
 export default function MainForm({
   form,
@@ -137,6 +147,34 @@ export default function MainForm({
     setEditingMode(false);
 
     toast.success("Form updated successfully");
+  };
+
+  const handleCopyTemplate = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const newTitle = `${title} (Copy)`;
+      const formData = new FormData();
+      formData.append("title", newTitle);
+      formData.append("description", form.description);
+      formData.append("topic", form.topic);
+      formData.append("questions", JSON.stringify(questions));
+
+      const result = await createForm(
+        newTitle,
+        form.description,
+        form.topic,
+        questions
+      );
+
+      if (result?.error) {
+        toast.error(result.error);
+      } else {
+        router.push(`/dashboard`);
+        toast.success("Template cloned successfully");
+      }
+    } catch (error) {
+      toast.error("Failed to clone template");
+    }
   };
 
   return (
@@ -318,14 +356,34 @@ export default function MainForm({
           ) : (
             <div>
               {!isEditingMode ? (
-                <div className="flex items-center justify-center mt-6">
-                  To make any changes, enter&nbsp;
-                  <span
-                    className="text-blue-600 cursor-pointer underline underline-offset-2"
-                    onClick={() => setEditingMode(true)}
-                  >
-                    edition mode
-                  </span>
+                <div className="mt-6 space-y-4">
+                  <div className="flex flex-col items-center justify-center space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0">
+                    <Button variant="outline" size="sm" disabled>
+                      Enter Edition Mode{" "}
+                      <MoreVertical className="w-4 h-4 ml-2" />
+                    </Button>
+                    <div className="hidden sm:block">
+                      <Separator className="h-6" />
+                    </div>
+                    <div className="sm:hidden">
+                      <Separator className="w-1/2 mx-auto" />
+                    </div>
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={handleCopyTemplate}
+                      disabled={state?.pending}
+                    >
+                      <Copy className="w-4 h-4 mr-2" />
+                      {state?.pending ? "Cloning..." : "Clone This Form"}
+                    </Button>
+                  </div>
+
+                  <p className="text-sm text-muted-foreground text-center max-w-lg mx-auto">
+                    Disclaimer: You can only make direct changes if you are an
+                    admin. Toggle edition mode in the top right corner to make
+                    changes.
+                  </p>
                 </div>
               ) : (
                 <div className="flex items-center justify-between mt-6">
