@@ -25,8 +25,12 @@ export default async function FormPageHeader({ form }: { form: Form[] }) {
           <p className="pl-1 sm:pl-4 pr-3">{form[0].title}</p>
         </div>
         <div className="flex items-center sm:gap-x-4">
-          <SendForm />
-          {selectedOption === "me" && <EditingModeMenu />}
+          {selectedOption === "me" && (
+            <>
+              <SendForm />
+              <EditingModeMenu />
+            </>
+          )}
           {selectedOption === "templates" && isAdmin[0].admin && (
             <EditingModeMenu />
           )}
