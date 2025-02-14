@@ -19,14 +19,14 @@ export default function RecentForms() {
   return (
     <section className="p-4 space-y-4 pt-8">
       <div className="flex justify-between items-center">
-        <div className="bg-primary rounded-md px-4 py-1">
-          <p className="text-xl text-white dark:text-black font-medium">
+        <div className="bg-primary rounded-md px-1 py-1 sm:px-4 sm:py-1 ">
+          <p className="text-lg sm:text-xl text-nowrap text-white dark:text-black font-medium">
             Recent Forms
           </p>
         </div>
-        <div className="flex items-center gap-x-2">
+        <div className="flex flex-col sm:flex-row items-center gap-2">
           <Link href="/dashboard/new" passHref>
-            <Button size="sm">
+            <Button size="sm" className="w-[180px]">
               <Plus /> Create New Form
             </Button>
           </Link>
@@ -34,7 +34,7 @@ export default function RecentForms() {
             defaultValue={selectedOption}
             onValueChange={setSelectedOption}
           >
-            <SelectTrigger className="w-[200px] rounded-md shadow-sm">
+            <SelectTrigger className="w-[180px] rounded-md shadow-sm">
               <SelectValue placeholder="Owned by anyone" />
             </SelectTrigger>
             <SelectContent>
