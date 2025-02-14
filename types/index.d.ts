@@ -44,4 +44,5 @@ declare interface FormState {
 declare interface FormStore {
   selectedOption: string;
   setSelectedOption: (option: string) => void;
+  syncWithCookie: () => void;
 }

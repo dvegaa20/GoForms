@@ -12,9 +12,11 @@ import { Button } from "../ui/button";
 import { Plus } from "lucide-react";
 import Link from "next/link";
 import { useFormOrTemplateStore } from "@/../store/store";
+import { useSyncStoreWithCookie } from "@/../hooks/useSyncStore-Cookie";
 
 export default function RecentForms() {
   const { selectedOption, setSelectedOption } = useFormOrTemplateStore();
+  useSyncStoreWithCookie();
 
   return (
     <section className="p-4 space-y-4 pt-8">
