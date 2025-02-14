@@ -8,11 +8,10 @@ export default async function PublicFormIdPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const selectedOption = (await cookies()).get("selectedOption")?.value;
-  const form = (await fetchFormById({ id, selectedOption })) as Form[];
+  const form = (await fetchFormById({ id, selectedOption: "me" })) as Form[];
   const formQuestions = (await getQuestions({
     id,
-    selectedOption,
+    selectedOption: "me",
   })) as Question[];
 
   if (!form) {

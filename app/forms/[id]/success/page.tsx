@@ -7,14 +7,13 @@ import {
 import { fetchFormById } from "../../../../lib/actions/form_actions";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { cookies } from "next/headers";
 export default async function FormSuccessPage({
-  params: { id },
+  params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const selectedOption = (await cookies()).get("selectedOption")?.value;
-  const form = (await fetchFormById({ id, selectedOption })) as Form[];
+  const { id } = await params;
+  const form = (await fetchFormById({ id, selectedOption: "me" })) as Form[];
 
   if (!form) {
     notFound();

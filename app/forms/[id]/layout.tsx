@@ -1,9 +1,9 @@
 export default function FormIdLayout({
   children,
-  params: { id },
+  params,
 }: {
   children: React.ReactNode;
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
   return (
     <div className="bg-blue-100 dark:bg-gray-900 min-h-screen px-6">
