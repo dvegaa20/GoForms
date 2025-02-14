@@ -18,7 +18,7 @@ export default function ResponsesTabs() {
           value=""
           className={cn(
             "flex-col !p-0",
-            isActive ? "!text-blue-900" : "text-neutral-950"
+            isActive ? "!text-blue-600" : "text-neutral-950"
           )}
           asChild
         >
@@ -32,7 +32,7 @@ export default function ResponsesTabs() {
             <hr
               className={cn(
                 "w-full border-b-2 rounded-t-xl",
-                isActive ? "border-blue-900" : "border-transparent"
+                isActive ? "border-blue-600" : "border-transparent"
               )}
             />
           </div>
