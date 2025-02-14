@@ -29,7 +29,7 @@ import {
   createForm,
   updateFormData,
 } from "@/../lib/actions/form_actions";
-import { useEditingMode } from "@/../store/store";
+import { useEditingMode, useFormOrTemplateStore } from "@/../store/store";
 import SubmitButton from "./SubmitButton";
 import { toast } from "sonner";
 import { Separator } from "@radix-ui/react-select";
@@ -51,6 +51,7 @@ export default function MainForm({
   const initialState = { error: "" };
   const [state, formAction] = useActionState(addFormData, initialState);
   const { isEditingMode, setEditingMode } = useEditingMode();
+  const { selectedOption } = useFormOrTemplateStore();
 
   useEffect(() => {
     if (state.success) {
@@ -136,7 +137,10 @@ export default function MainForm({
 
   const handleSubmitUpdate = async () => {
     const formData = new FormData();
-    formData.append("template_id", form.id);
+    formData.append(
+      `${selectedOption === "me" ? "form_id" : "template_id"}`,
+      form.id
+    );
     formData.append("title", title);
     formData.append("description", form.description);
     formData.append("topic", form.topic);

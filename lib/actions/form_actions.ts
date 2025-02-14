@@ -2,6 +2,7 @@
 
 import { currentUser } from "@clerk/nextjs/server";
 import { neon } from "@neondatabase/serverless";
+import { cookies } from "next/headers";
 
 const sql = neon(process.env.DATABASE_URL);
 
@@ -193,57 +194,73 @@ export async function addFormData(prevState: any, formData: FormData) {
 }
 
 export async function updateFormData(prevState: any, formData: FormData) {
-  const rawFormData = Object.entries(Object.fromEntries(formData))
-    .filter(([key, value]) => !key.startsWith("$ACTION"))
-    .map(([key, value]) => ({ key, value }));
+  const cookieStore = await cookies();
+  const selectedOption = cookieStore.get("selectedOption")?.value || "me";
 
-  const templateId = rawFormData
-    .find((data) => data.key === "template_id")
-    ?.value.toString();
-  const title = rawFormData
-    .find((data) => data.key === "title")
-    ?.value.toString();
-  const description = rawFormData
-    .find((data) => data.key === "description")
-    ?.value.toString();
-  const topic = rawFormData
-    .find((data) => data.key === "topic")
-    ?.value.toString();
-
-  const questions = JSON.parse(
-    rawFormData.find((data) => data.key === "questions")?.value.toString() ||
-      "[]"
+  const filteredData = Object.fromEntries(
+    Array.from(formData.entries()).filter(([key]) => !key.startsWith("$ACTION"))
   );
+  const formIdKey = selectedOption === "me" ? "form_id" : "template_id";
+  const formId = filteredData[formIdKey]?.toString();
+  const title = filteredData.title?.toString();
+  const description = filteredData.description?.toString();
+  const topic = filteredData.topic?.toString();
+  const questions = JSON.parse(filteredData.questions?.toString() || "[]");
 
-  if (!templateId) return { error: "Template ID is required." };
+  if (!formId) return { error: "Template ID is required." };
 
   try {
-    await sql`
-        UPDATE templates 
-        SET title = ${title}, description = ${description}, topic = ${topic}, updated_at = NOW()
-        WHERE id = ${templateId}
-      `;
-
-    const existingQuestion = await sql`
-        SELECT id FROM questions WHERE template_id = ${templateId}
-      `;
-
-    if (existingQuestion.length > 0) {
+    if (selectedOption === "me") {
       await sql`
+        UPDATE forms 
+        SET title = ${title}, description = ${description}, topic = ${topic}, updated_at = NOW()
+        WHERE id = ${formId}
+      `;
+
+      const existingQuestion = await sql`
+        SELECT id FROM questions WHERE form_id = ${formId}
+      `;
+
+      if (existingQuestion.length > 0) {
+        await sql`
           UPDATE questions
           SET questions = ${JSON.stringify(questions)}, updated_at = NOW()
-          WHERE template_id = ${templateId}
+          WHERE form_id = ${formId}
         `;
-    } else {
+      } else {
+        await sql`
+          INSERT INTO questions (form_id, questions, created_at, updated_at)
+          VALUES (${formId}, ${JSON.stringify(questions)}, NOW(), NOW())
+        `;
+      }
+    } else if (selectedOption === "templates") {
       await sql`
-          INSERT INTO questions (template_id, questions, created_at, updated_at)
-          VALUES (${templateId}, ${JSON.stringify(questions)}, NOW(), NOW())
+        UPDATE templates 
+        SET title = ${title}, description = ${description}, topic = ${topic}, updated_at = NOW()
+        WHERE id = ${formId}
+      `;
+
+      const existingQuestion = await sql`
+        SELECT id FROM questions WHERE template_id = ${formId}
+      `;
+
+      if (existingQuestion.length > 0) {
+        await sql`
+          UPDATE questions
+          SET questions = ${JSON.stringify(questions)}, updated_at = NOW()
+          WHERE template_id = ${formId}
         `;
+      } else {
+        await sql`
+          INSERT INTO questions (template_id, questions, created_at, updated_at)
+          VALUES (${formId}, ${JSON.stringify(questions)}, NOW(), NOW())
+        `;
+      }
     }
 
-    return { success: true, templateId };
+    return { success: true, formId };
   } catch (error) {
-    return { error: error.message };
+    throw new Error(error);
   }
 }
 
