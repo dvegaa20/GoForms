@@ -155,41 +155,25 @@ export async function processQuestions(formQuestions: any, responses: any) {
 
 // Form Actions
 export async function addFormData(prevState: any, formData: FormData) {
-  const rawFormData = Object.entries(Object.fromEntries(formData))
-    .filter(([key, value]) => !key.startsWith("$ACTION"))
-    .map(([key, value]) => ({ key, value }));
-
-  const formIdentifier = rawFormData
-    .find((data) => data.key === "identifier")
-    ?.value.toString();
-
-  const formDataToSubmit = rawFormData.filter(
-    (data) => data.key !== "identifier"
+  const filteredData = Object.fromEntries(
+    Array.from(formData.entries()).filter(([key]) => !key.startsWith("$ACTION"))
   );
+  const formIdentifier = filteredData.identifier?.toString();
 
-  if (!formIdentifier) return;
-
-  let error: ErrorResponse | null = null;
-  let formDataEntity: any = null;
+  if (!formIdentifier) return { error: "Identifier is required" };
 
   try {
-    formDataEntity = await sql`
-        INSERT INTO FormsData (form_identifier, form_data) 
-        VALUES (${formIdentifier}, ${JSON.stringify(formDataToSubmit)}) 
-        RETURNING id
-      `;
+    const { id } = await sql`
+      INSERT INTO FormsData (form_identifier, form_data) 
+      VALUES (${formIdentifier}, ${JSON.stringify(filteredData)})
+      RETURNING id
+    `.then((res) => res[0]);
 
-    if (!formDataEntity.length || !formDataEntity[0].id) {
-      error = {
-        statusCode: 500,
-        message: "Error adding data to the form.",
-      };
-      return { error: error.message };
-    }
+    if (!id) return { error: "Error adding data to the form" };
 
     return { success: true, formIdentifier };
   } catch (error) {
-    return { error: error.message };
+    return { error: error instanceof Error ? error.message : "Unknown error" };
   }
 }
 
@@ -299,8 +283,12 @@ export async function createForm(
 export async function removeForm(id, selectedOption) {
   try {
     if (selectedOption === "me") {
+      await sql`DELETE FROM FormsData WHERE form_identifier = ${id}`;
+      await sql`DELETE FROM Questions WHERE form_id = ${id}`;
       await sql`DELETE FROM Forms WHERE id = ${id}`;
     } else if (selectedOption === "templates") {
+      await sql`DELETE FROM FormsData WHERE form_identifier = ${id}`;
+      await sql`DELETE FROM Questions WHERE template_id = ${id}`;
       await sql`DELETE FROM Templates WHERE id = ${id}`;
     }
   } catch (error) {
