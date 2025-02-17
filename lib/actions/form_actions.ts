@@ -80,9 +80,17 @@ export async function getNumberOfResponses(
     .flatMap((response) => {
       if (!response?.form_data) return [];
 
-      return response.form_data
-        .filter((item: any) => item.key === questionKey && item.value !== "")
-        .map((item: any) => item.value);
+      const value = Array.isArray(response.form_data)
+        ? response.form_data.find((item: any) => item.key === questionKey)
+            ?.value
+        : response.form_data[questionKey];
+
+      const stringValue = typeof value === "string" ? value.trim() : "";
+
+      if (!stringValue || /\.(png|jpg|jpeg|gif|webp|bmp)$/i.test(stringValue))
+        return [];
+
+      return stringValue;
     })
     .reduce(
       (counts, value) => {
@@ -112,13 +120,16 @@ export async function getIndividualResponses(
   const items = responses.flatMap((response) => {
     if (!response?.form_data) return [];
 
-    const attribute = response.form_data.find(
-      (item) => item.key === questionKey
-    );
+    const value = Array.isArray(response.form_data)
+      ? response.form_data.find((item: any) => item.key === questionKey)?.value
+      : response.form_data[questionKey];
 
-    if (!attribute?.value) return [];
+    const stringValue = typeof value === "string" ? value.trim() : "";
 
-    return { ...attribute };
+    if (!stringValue || /\.(png|jpg|jpeg|gif|webp|bmp)$/i.test(stringValue))
+      return [];
+
+    return { key: questionKey, value: stringValue };
   });
 
   const groupedItems = items.reduce(
