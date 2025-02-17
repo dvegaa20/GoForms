@@ -30,27 +30,29 @@ export default async function ResponsesPage({
 
   return (
     <div className="space-y-3.5">
-      {questions.map((question) => (
-        <Card key={question.order}>
-          <CardHeader>
-            <CardTitle className="font-normal text-base">
-              {question.question_title}
-            </CardTitle>
-            <CardDescription className="text-xs">
-              {Object.entries(question.numberOfResponses)
-                .map(([key, value]) => `${value} answered "${key}"`)
-                .join(", ")}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            {Object.keys(question.numberOfResponses).length > 0 ? (
-              <BarChart responses={question.responses} />
-            ) : (
-              "No responses yet."
-            )}
-          </CardContent>
-        </Card>
-      ))}
+      {questions.map((question) =>
+        question.question_type === "file" ? null : (
+          <Card key={question.order}>
+            <CardHeader>
+              <CardTitle className="font-normal text-base">
+                {question.question_title}
+              </CardTitle>
+              <CardDescription className="text-xs">
+                {Object.entries(question.numberOfResponses)
+                  .map(([key, value]) => `${value} answered "${key}"`)
+                  .join(", ")}
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              {Object.keys(question.numberOfResponses).length > 0 ? (
+                <BarChart responses={question.responses} />
+              ) : (
+                "No responses yet."
+              )}
+            </CardContent>
+          </Card>
+        )
+      )}
     </div>
   );
 }
