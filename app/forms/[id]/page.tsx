@@ -1,7 +1,7 @@
 import { fetchFormById, getQuestions } from "../../../lib/actions/form_actions";
 import { notFound } from "next/navigation";
 import MainForm from "@/components/go_form/form/MainForm";
-import { cookies } from "next/headers";
+import { ModeToggle } from "@/components/ModeToggle";
 export default async function PublicFormIdPage({
   params,
 }: {
@@ -18,5 +18,12 @@ export default async function PublicFormIdPage({
     notFound();
   }
 
-  return <MainForm form={form[0]} formQuestions={formQuestions} publicForm />;
+  return (
+    <div>
+      <div className="flex justify-end pt-4">
+        <ModeToggle />
+      </div>
+      <MainForm form={form[0]} formQuestions={formQuestions} publicForm />
+    </div>
+  );
 }
