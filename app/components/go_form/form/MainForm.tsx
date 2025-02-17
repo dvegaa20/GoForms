@@ -246,6 +246,7 @@ export default function MainForm({
                             <SelectItem value="radio">Options</SelectItem>
                             <SelectItem value="number">Decimal</SelectItem>
                             <SelectItem value="boolean">Yes/No</SelectItem>
+                            <SelectItem value="file">File</SelectItem>
                           </SelectContent>
                         </Select>
                         <Button

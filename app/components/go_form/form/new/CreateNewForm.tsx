@@ -207,8 +207,7 @@ export default function CreateForm() {
                             </SelectItem>
                             <SelectItem value="number">Number</SelectItem>
                             <SelectItem value="boolean">Yes/No</SelectItem>
-                            <SelectItem value="rating">Rating</SelectItem>
-                            <SelectItem value="email">Email</SelectItem>
+                            <SelectItem value="file">File</SelectItem>
                           </SelectContent>
                         </Select>
                         <Button
