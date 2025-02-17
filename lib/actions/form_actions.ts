@@ -2,6 +2,7 @@
 
 import { currentUser } from "@clerk/nextjs/server";
 import { neon } from "@neondatabase/serverless";
+import { put } from "@vercel/blob";
 import { cookies } from "next/headers";
 
 const sql = neon(process.env.DATABASE_URL);
@@ -155,11 +156,27 @@ export async function processQuestions(formQuestions: any, responses: any) {
 
 // Form Actions
 export async function addFormData(prevState: any, formData: FormData) {
-  const filteredData = Object.fromEntries(
-    Array.from(formData.entries()).filter(([key]) => !key.startsWith("$ACTION"))
-  );
-  const formIdentifier = filteredData.identifier?.toString();
+  const filteredData: Record<string, any> = {};
 
+  for (const [key, value] of formData.entries()) {
+    if (key.startsWith("$ACTION")) continue;
+
+    if (value instanceof File) {
+      try {
+        const blob = await put(value.name, value, {
+          access: "public",
+          token: process.env.BLOB_READ_WRITE_TOKEN,
+        });
+        filteredData[key] = blob.url;
+      } catch (error) {
+        return { error: "Error subiendo archivo" };
+      }
+    } else {
+      filteredData[key] = value;
+    }
+  }
+
+  const formIdentifier = filteredData.identifier?.toString();
   if (!formIdentifier) return { error: "Identifier is required" };
 
   try {
@@ -169,9 +186,9 @@ export async function addFormData(prevState: any, formData: FormData) {
       RETURNING id
     `.then((res) => res[0]);
 
-    if (!id) return { error: "Error adding data to the form" };
-
-    return { success: true, formIdentifier };
+    return id
+      ? { success: true, formIdentifier }
+      : { error: "Error adding data" };
   } catch (error) {
     return { error: error instanceof Error ? error.message : "Unknown error" };
   }
