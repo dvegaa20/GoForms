@@ -4,6 +4,7 @@ import { Layers } from "lucide-react";
 import { BackgroundBeamsWithCollision } from "../ui/background-beams-with-collision";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { ModeToggle } from "../ModeToggle";
+import { LanguageSwitcher } from "../LangToggle";
 
 export default function Header() {
   return (
@@ -29,6 +30,10 @@ export default function Header() {
                 Let's Get Started
               </Link>
             </div>
+            <div className="flex justify-end space-x-2">
+              <LanguageSwitcher />
+              <ModeToggle />
+            </div>
             <SignedOut>
               <Button asChild>
                 <SignInButton mode="modal" forceRedirectUrl="/dashboard" />
@@ -37,7 +42,6 @@ export default function Header() {
             <SignedIn>
               <UserButton />
             </SignedIn>
-            <ModeToggle />
           </nav>
         </div>
       </header>

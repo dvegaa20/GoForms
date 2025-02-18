@@ -2,6 +2,8 @@ import { fetchFormById, getQuestions } from "@/../lib/actions/form_actions";
 import { notFound } from "next/navigation";
 import MainForm from "@/../components/go_form/form/MainForm";
 import { ModeToggle } from "@/../components/ModeToggle";
+import { LanguageSwitcher } from "@/../components/LangToggle";
+
 export default async function PublicFormIdPage({
   params,
 }: {
@@ -20,7 +22,8 @@ export default async function PublicFormIdPage({
 
   return (
     <div>
-      <div className="flex justify-end pt-4">
+      <div className="flex justify-end space-x-2 pt-4">
+        <LanguageSwitcher />
         <ModeToggle />
       </div>
       <MainForm form={form[0]} formQuestions={formQuestions} publicForm />

@@ -8,6 +8,7 @@ import { ModeToggle } from "@/../components/ModeToggle";
 import { currentUser } from "@clerk/nextjs/server";
 import { fetchUserAdminStatus } from "@/../lib/actions/user_actions";
 import { cookies } from "next/headers";
+import { LanguageSwitcher } from "@/../components/LangToggle";
 
 export default async function FormPageHeader({ form }: { form: Form[] }) {
   const user = await currentUser();
@@ -34,8 +35,11 @@ export default async function FormPageHeader({ form }: { form: Form[] }) {
           {selectedOption === "templates" && isAdmin[0].admin && (
             <EditingModeMenu />
           )}
+          <div className="flex justify-end space-x-2">
+            <LanguageSwitcher />
+            <ModeToggle />
+          </div>
           <UserButton />
-          <ModeToggle />
         </div>
       </div>
       {selectedOption === "me" && <FormPageHeaderBottom form={form} />}

@@ -6,6 +6,7 @@ import { UserButton } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
 import { fetchUserAdminStatus } from "@/../lib/actions/user_actions";
 import { ModeToggle } from "../ModeToggle";
+import { LanguageSwitcher } from "../LangToggle";
 
 export default async function Header() {
   const user = await currentUser();
@@ -21,9 +22,12 @@ export default async function Header() {
       </div>
       <div className="flex items-center space-x-4">
         <Search />
-        {isAdmin[0].admin && <AdminPanel />}
+        <div className="flex justify-end space-x-2">
+          <LanguageSwitcher />
+          <ModeToggle />
+        </div>
         <UserButton />
-        <ModeToggle />
+        {isAdmin[0].admin && <AdminPanel />}
       </div>
     </header>
   );

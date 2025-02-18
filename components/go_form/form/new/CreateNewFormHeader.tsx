@@ -5,7 +5,7 @@ import Link from "next/link";
 import { UserButton } from "@clerk/nextjs";
 import { useFormStore } from "@/../store/store";
 import { ModeToggle } from "@/../components/ModeToggle";
-
+import { LanguageSwitcher } from "@/../components/LangToggle";
 export default function CreateNewFormHeader() {
   const title = useFormStore((state) => state.title);
 
@@ -20,8 +20,11 @@ export default function CreateNewFormHeader() {
           <p className="pl-1 sm:pl-4 pr-3">{title}</p>
         </div>
         <div className="flex items-center sm:gap-x-4">
+          <div className="flex justify-end space-x-2">
+            <LanguageSwitcher />
+            <ModeToggle />
+          </div>
           <UserButton />
-          <ModeToggle />
         </div>
       </div>
     </header>
