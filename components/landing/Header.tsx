@@ -5,8 +5,10 @@ import { BackgroundBeamsWithCollision } from "../ui/background-beams-with-collis
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { ModeToggle } from "../ModeToggle";
 import { LanguageSwitcher } from "../LangToggle";
+import { getTranslations } from "next-intl/server";
 
-export default function Header() {
+export default async function Header() {
+  const t = await getTranslations("LandingHeader");
   return (
     <BackgroundBeamsWithCollision>
       <header className="w-full px-4 lg:px-6 h-20 flex items-center justify-between border-b">
@@ -21,13 +23,13 @@ export default function Header() {
                 className="text-sm font-medium hover:text-primary transition-colors"
                 href="#features"
               >
-                Features
+                {t("navLink1")}
               </Link>
               <Link
                 className="text-sm font-medium hover:text-primary transition-colors"
                 href="#cta"
               >
-                Let's Get Started
+                {t("navLink2")}
               </Link>
             </div>
             <div className="flex justify-end space-x-2">
