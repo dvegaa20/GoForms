@@ -28,12 +28,12 @@ import FormList from "@/../components/go_form/admin/FormList";
 import { useForms } from "@/../hooks/useForm";
 import { removeForm } from "@/../lib/actions/form_actions";
 import { useFormOrTemplateStore } from "@/../store/store";
-
+import { useTranslations } from "next-intl";
 export default function AdminPanel() {
   const [users, setUsers] = useState([]);
   const { selectedOption } = useFormOrTemplateStore();
   const { forms, setForms } = useForms();
-
+  const t = useTranslations("AdminPanel");
   useEffect(() => {
     const loadUsers = async () => {
       try {
@@ -105,15 +105,13 @@ export default function AdminPanel() {
       </SheetTrigger>
       <SheetContent className="w-[400px] sm:w-[540px]">
         <SheetHeader>
-          <SheetTitle>Admin Panel</SheetTitle>
-          <SheetDescription>
-            Manage quickly any users and forms.
-          </SheetDescription>
+          <SheetTitle>{t("title")}</SheetTitle>
+          <SheetDescription>{t("description")}</SheetDescription>
         </SheetHeader>
         <Tabs defaultValue="users" className="mt-4">
           <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="users">Users</TabsTrigger>
-            <TabsTrigger value="forms">Forms</TabsTrigger>
+            <TabsTrigger value="users">{t("users")}</TabsTrigger>
+            <TabsTrigger value="forms">{t("forms")}</TabsTrigger>
           </TabsList>
           <TabsContent value="users" className="pt-2">
             <UserList

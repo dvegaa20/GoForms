@@ -13,10 +13,12 @@ import { SearchIcon, Command as LucideCommand, ChevronUp } from "lucide-react";
 import { useDialogStore } from "@/../store/store";
 import { useRouter } from "next/navigation";
 import { DialogTitle } from "@/../components/ui/dialog";
+import { useTranslations } from "next-intl";
 
 export default function SearchInput({ forms }: { forms: Form[] }) {
   const router = useRouter();
   const { close, isOpen, open } = useDialogStore();
+  const t = useTranslations("SearchBar");
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -46,7 +48,8 @@ export default function SearchInput({ forms }: { forms: Form[] }) {
         <div className="flex items-center gap-x-2">
           <SearchIcon className="w-4 h-4 text-neutral-500" />
           <p className="text-neutral-500 font-light flex items-center text-sm">
-            Search or Press <LucideCommand className="w-4 h-4 mx-1" />k or
+            {t("placeholder")} <LucideCommand className="w-4 h-4 mx-1" />k{" "}
+            {t("_")}
             <ChevronUp className="w-4 h-4 mx-1" /> k
           </p>
         </div>
@@ -55,7 +58,7 @@ export default function SearchInput({ forms }: { forms: Form[] }) {
         <DialogTitle></DialogTitle>
         <CommandInput placeholder="Search" />
         <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
+          <CommandEmpty>{t("noResults")}</CommandEmpty>
           <CommandGroup>
             {forms.map((form) => (
               <CommandItem
