@@ -1,0 +1,47 @@
+{
+  "LandingHeader": {
+    "navLink1": "Fonctionnalités",
+    "navLink2": "Commencer"
+  },
+  "LandingHero": {
+    "title": "Créer des formulaires beaux en minutes",
+    "subtitle": "GoForms vous aide à créer, partager et analyser des formulaires avec facilité. Commencez gratuitement et mettez à niveau selon que vous grandissez.",
+    "button": "Commencer"
+  },
+  "LandingFeatures": {
+    "title": "Fonctionnalités",
+    "feature1": "Création de formulaires facile",
+    "feature2": "Analyse avancée",
+    "feature3": "Collaboration",
+    "feature1Description": "Interface de glisser-déposer pour créer des formulaires rapides et intuitifs.",
+    "feature2Description": "Obtenez des insights des réponses avec nos outils de création de formulaires puissants.",
+    "feature3Description": "Travaillez ensemble sur des formulaires avec votre équipe en temps réel."
+  },
+  "LandingCta": {
+    "title": "Prêt à créer des formulaires incroyables ?",
+    "subtitle": "Rejoignez des milliers d'utilisateurs satisfaits et créez des formulaires dès aujourd'hui.",
+    "button": "Commencer maintenant"
+  },
+  "LandingFooter": {
+    "copyright": "Tous droits réservés.",
+    "terms": "Conditions d'utilisation",
+    "privacy": "Confidentialité"
+  },
+  "SearchBar": {
+    "placeholder": "Rechercher ou Presser",
+    "_": "ou",
+    "noResults": "Aucun résultat trouvé."
+  },
+  "AdminPanel": {
+    "title": "Panneau d'administration",
+    "description": "Gérez rapidement tous les utilisateurs et les formulaires.",
+    "users": "Utilisateurs",
+    "forms": "Formulaires"
+  },
+  "RecentForms": {
+    "title": "Formulaires récents",
+    "createNewForm": "Créer un nouveau formulaire",
+    "selectOption1": "Propre",
+    "selectOption2": "Modèles de GoForms"
+  }
+}

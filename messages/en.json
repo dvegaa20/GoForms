@@ -1,0 +1,47 @@
+{
+  "LandingHeader": {
+    "navLink1": "Features",
+    "navLink2": "Let's Get Started"
+  },
+  "LandingHero": {
+    "title": "Create Beautiful Forms in Minutes",
+    "subtitle": "GoForms helps you create, share, and analyze forms with ease. Start for free and upgrade as you grow.",
+    "button": "Get Started"
+  },
+  "LandingFeatures": {
+    "title": "Features",
+    "feature1": "Easy Form Creation",
+    "feature2": "Advanced Analytics",
+    "feature3": "Collaboration",
+    "feature1Description": "Drag-and-drop interface for quick and intuitive form building.",
+    "feature2Description": "Get insights from responses with our powerful analytics tools.",
+    "feature3Description": "Work together on forms with your team in real-time."
+  },
+  "LandingCta": {
+    "title": "Ready to Create Amazing Forms?",
+    "subtitle": "Join thousands of satisfied users and start creating forms today.",
+    "button": "Start Right Now"
+  },
+  "LandingFooter": {
+    "copyright": "All rights reserved.",
+    "terms": "Terms of Service",
+    "privacy": "Privacy"
+  },
+  "SearchBar": {
+    "placeholder": "Search or Press",
+    "_": "or",
+    "noResults": "No results found."
+  },
+  "AdminPanel": {
+    "title": "Admin Panel",
+    "description": "Manage quickly any users and forms.",
+    "users": "Users",
+    "forms": "Forms"
+  },
+  "RecentForms": {
+    "title": "Recent Forms",
+    "createNewForm": "Create New Form",
+    "selectOption1": "Owned by me",
+    "selectOption2": "Go Forms Templates"
+  }
+}

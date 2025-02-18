@@ -1,0 +1,47 @@
+{
+  "LandingHeader": {
+    "navLink1": "Características",
+    "navLink2": "Comienza Ahora"
+  },
+  "LandingHero": {
+    "title": "Crea Formularios Hermosos en Minutos",
+    "subtitle": "GoForms te ayuda a crear, compartir y analizar formularios con facilidad. Comienza gratis y actualiza según creces.",
+    "button": "Comienza Ahora"
+  },
+  "LandingFeatures": {
+    "title": "Características",
+    "feature1": "Creación de Formularios Fácil",
+    "feature2": "Análisis Avanzado",
+    "feature3": "Colaboración",
+    "feature1Description": "Interfaz de arrastrar y soltar para crear formularios rápidos y intuitivos.",
+    "feature2Description": "Obtén insights de las respuestas con nuestras herramientas de análisis poderosas.",
+    "feature3Description": "Trabaja juntos en formularios con tu equipo en tiempo real."
+  },
+  "LandingCta": {
+    "title": "¿Listo para crear Formularios Increíbles?",
+    "subtitle": "Únete a miles de usuarios satisfechos y comienza a crear formularios hoy.",
+    "button": "Comienza Ahora"
+  },
+  "LandingFooter": {
+    "copyright": "Todos los derechos reservados.",
+    "terms": "Términos de Servicio",
+    "privacy": "Privacidad"
+  },
+  "SearchBar": {
+    "placeholder": "Buscar o Presiona",
+    "_": "o",
+    "noResults": "No se encontraron resultados."
+  },
+  "AdminPanel": {
+    "title": "Panel de Administración",
+    "description": "Administra rápidamente a cualquier usuario y formulario.",
+    "users": "Usuarios",
+    "forms": "Formularios"
+  },
+  "RecentForms": {
+    "title": "Formularios Recientes",
+    "createNewForm": "Crear Nuevo Formulario",
+    "selectOption1": "Propio",
+    "selectOption2": "Plantillas de GoForms"
+  }
+}
