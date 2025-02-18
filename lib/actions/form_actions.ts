@@ -87,9 +87,6 @@ export async function getNumberOfResponses(
 
       const stringValue = typeof value === "string" ? value.trim() : "";
 
-      if (!stringValue || /\.(png|jpg|jpeg|gif|webp|bmp)$/i.test(stringValue))
-        return [];
-
       return stringValue;
     })
     .reduce(
@@ -125,9 +122,6 @@ export async function getIndividualResponses(
       : response.form_data[questionKey];
 
     const stringValue = typeof value === "string" ? value.trim() : "";
-
-    if (!stringValue || /\.(png|jpg|jpeg|gif|webp|bmp)$/i.test(stringValue))
-      return [];
 
     return { key: questionKey, value: stringValue };
   });
@@ -180,7 +174,7 @@ export async function addFormData(prevState: any, formData: FormData) {
         });
         filteredData[key] = blob.url;
       } catch (error) {
-        return { error: "Error subiendo archivo" };
+        return { error: "Error uploading file, check for size limits" };
       }
     } else {
       filteredData[key] = value;
