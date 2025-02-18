@@ -1,5 +1,5 @@
-import BlockedUserDialog from "@/components/go_form/BlockedUser";
-import CreateNewFormHeader from "@/components/go_form/form/new/CreateNewFormHeader";
+import BlockedUserDialog from "@/../components/go_form/BlockedUser";
+import CreateNewFormHeader from "@/../components/go_form/form/new/CreateNewFormHeader";
 import { getUserStatus } from "@/../lib/auth";
 
 export default async function NewFormLayout({

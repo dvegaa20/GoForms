@@ -3,8 +3,8 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { cn } from "@/../lib/utils";
-import { Toaster } from "./components/ui/sonner";
-import { ThemeProvider } from "@/components/ThemeProvider";
+import { Toaster } from "@/../components/ui/sonner";
+import { ThemeProvider } from "@/../components/ThemeProvider";
 
 const fontSans = Plus_Jakarta_Sans({
   subsets: ["latin"],

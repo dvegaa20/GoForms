@@ -1,6 +1,6 @@
-import ResponsesHeader from "@/components/go_form/form/responses/ResponsesHeader";
+import ResponsesHeader from "@/../components/go_form/form/responses/ResponsesHeader";
 import { getUserStatus } from "@/../lib/auth";
-import BlockedUserDialog from "@/components/go_form/BlockedUser";
+import BlockedUserDialog from "@/../components/go_form/BlockedUser";
 
 export default async function ResponsesLayout({
   children,

@@ -3,8 +3,8 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { fetchFormById } from "../../../../lib/actions/form_actions";
+} from "@/../components/ui/card";
+import { fetchFormById } from "@/../lib/actions/form_actions";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 export default async function FormSuccessPage({

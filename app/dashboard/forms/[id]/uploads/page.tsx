@@ -3,7 +3,12 @@ import {
   getResponses,
   processQuestions,
 } from "@/../lib/actions/form_actions";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/../components/ui/card";
 import { cookies } from "next/headers";
 import { ExternalLink, FileX2 } from "lucide-react";
 import Image from "next/image";

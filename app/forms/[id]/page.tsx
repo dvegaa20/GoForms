@@ -1,7 +1,7 @@
-import { fetchFormById, getQuestions } from "../../../lib/actions/form_actions";
+import { fetchFormById, getQuestions } from "@/../lib/actions/form_actions";
 import { notFound } from "next/navigation";
-import MainForm from "@/components/go_form/form/MainForm";
-import { ModeToggle } from "@/components/ModeToggle";
+import MainForm from "@/../components/go_form/form/MainForm";
+import { ModeToggle } from "@/../components/ModeToggle";
 export default async function PublicFormIdPage({
   params,
 }: {

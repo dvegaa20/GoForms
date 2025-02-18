@@ -1,4 +1,4 @@
-import BlockedUserDialog from "@/components/go_form/BlockedUser";
+import BlockedUserDialog from "@/../components/go_form/BlockedUser";
 import { getUserStatus } from "@/../lib/auth";
 
 export default async function DashboardLayout({

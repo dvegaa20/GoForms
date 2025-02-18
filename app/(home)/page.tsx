@@ -1,9 +1,9 @@
-import Header from "@/components/landing/Header";
-import Hero from "@/components/landing/Hero";
-import Cta from "@/components/landing/Cta";
-import Footer from "@/components/landing/Footer";
-import Features from "@/components/landing/Features";
-import { AuroraBackground } from "@/components/ui/aurora-background";
+import Header from "@/../components/landing/Header";
+import Hero from "@/../components/landing/Hero";
+import Cta from "@/../components/landing/Cta";
+import Footer from "@/../components/landing/Footer";
+import Features from "@/../components/landing/Features";
+import { AuroraBackground } from "@/../components/ui/aurora-background";
 
 export default async function LandingPage() {
   return (

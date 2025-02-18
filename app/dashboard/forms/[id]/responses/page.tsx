@@ -2,15 +2,15 @@ import {
   getQuestions,
   getResponses,
   processQuestions,
-} from "../../../../../lib/actions/form_actions";
+} from "@/../lib/actions/form_actions";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import BarChart from "@/components/go_form/form/responses/BarChart";
+} from "@/../components/ui/card";
+import BarChart from "@/../components/go_form/form/responses/BarChart";
 import { cookies } from "next/headers";
 
 export default async function ResponsesPage({

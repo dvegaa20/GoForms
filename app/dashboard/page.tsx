@@ -1,5 +1,5 @@
-import Header from "@/components/go_form/Header";
-import RecentForms from "@/components/go_form/RecentForms";
+import Header from "@/../components/go_form/Header";
+import RecentForms from "@/../components/go_form/RecentForms";
 
 export default async function DashboardPage() {
   return (
