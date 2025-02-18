@@ -7,6 +7,13 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        hostname: "y9wupci8wqgldyvr.public.blob.vercel-storage.com",
+      },
+    ],
+  },
 };
 
 export default nextConfig;
