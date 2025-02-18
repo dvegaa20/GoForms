@@ -8,6 +8,7 @@ import Link from "next/link";
 const tabs = [
   { title: "Questions", href: "" },
   { title: "Responses", href: "responses" },
+  { title: "Uploads", href: "uploads" },
 ] as const;
 
 export default function FormTabs({
