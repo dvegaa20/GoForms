@@ -20,7 +20,7 @@ export default function LinkTabContent() {
     <TabsContent value="link" className="px-4 py-4 space-y-3">
       <div className="grid w-full items-center gap-3">
         <Label htmlFor="link" className="text-base">
-          Link
+          {t("linkTitle")}
         </Label>
         <Input type="url" id="link" value={url} readOnly />
       </div>
@@ -30,7 +30,7 @@ export default function LinkTabContent() {
           variant="outline"
           onClick={() => {
             navigator.clipboard.writeText(url);
-            toast.success("Link copied to clipboard");
+            toast.success(t("toastLinkCopied"));
           }}
         >
           <Clipboard className="w-4 h-4" />
