@@ -354,9 +354,7 @@ export default function CreateForm() {
               <div className="flex items-center justify-between">
                 <Button
                   type="submit"
-                  onClick={() =>
-                    toast.success(`Form has been saved successfully`)
-                  }
+                  onClick={() => toast.success(t("toastSaveForm"))}
                 >
                   {t("formSaveForm")}
                 </Button>
