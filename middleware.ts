@@ -1,20 +1,36 @@
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
-import createMiddleware from "next-intl/middleware";
+import { clerkMiddleware } from "@clerk/nextjs/server";
+import createIntlMiddleware from "next-intl/middleware";
+import { NextRequest, NextResponse } from "next/server";
 import { routing } from "./i18n/routing";
 
-const isPublicRoute = createRouteMatcher(["/sign-in(.*)", "/sign-up(.*)", "/"]);
-const intlMiddleware = createMiddleware(routing);
+const intlMiddleware = createIntlMiddleware(routing);
+const publicPaths = ["/sign-in", "/sign-up", "/"];
 
-export default clerkMiddleware(async (auth, request) => {
-  if (!isPublicRoute(request)) {
-    await auth.protect();
+export default clerkMiddleware(async (auth, req: NextRequest) => {
+  const response = intlMiddleware(req);
+  const pathname = req.nextUrl.pathname;
+  const cleanPath = pathname.replace(/^\/(en|es|fr)/, "") || "/";
+
+  const isPublic = publicPaths.some((path) => {
+    const regex = new RegExp(`^${path.replace("(.*)", ".*")}$`);
+    return regex.test(cleanPath);
+  });
+
+  if (!isPublic) {
+    const redirectUrl = `${req.nextUrl.origin}/sign-in`;
+    const protectResponse = await auth.protect({
+      unauthenticatedUrl: redirectUrl,
+      unauthorizedUrl: redirectUrl,
+    });
+
+    if (protectResponse instanceof NextResponse) {
+      return protectResponse;
+    }
   }
-  return intlMiddleware(request);
+
+  return response;
 });
 
 export const config = {
-  matcher: [
-    "/((?!api|_next/static|_next/image|favicon.ico|apple-touch-icon.png|favicon.svg|images/books|icons|manifest).*)",
-    "/(en|es|fr)/:path*",
-  ],
+  matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
 };
