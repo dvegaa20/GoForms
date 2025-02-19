@@ -39,7 +39,12 @@
     "title": "Panel de Administración",
     "description": "Administra rápidamente a cualquier usuario y formulario.",
     "users": "Usuarios",
-    "forms": "Formularios"
+    "forms": "Formularios",
+    "toast": "ha sido",
+    "toastBlocked": "bloqueado",
+    "toastUnblocked": "desbloqueado",
+    "toastAdmin": "ascendido a administrador",
+    "toastDemoted": "descendido de administrador"
   },
   "RecentForms": {
     "title": "Formularios Recientes",
@@ -78,13 +83,18 @@
     "formEmptyForm": "Formulario Vacío",
     "formEmptyFormDescription": "Este formulario no tiene campos. Haz clic en el botón de abajo para agregar campos a este formulario.",
     "formEmptyFormDescription2": "No hay campos disponibles en este formulario.",
-    "formGoBack": "Volver"
+    "formGoBack": "Volver",
+    "toastUpdate": "Formulario actualizado correctamente",
+    "toastClone": "Formulario clonado correctamente",
+    "toastCloneError": "Error al clonar el formulario",
+    "toastSaveForm": "Formulario guardado correctamente"
   },
   "DeleteDialog": {
     "title": "¿Estás seguro?",
     "description": "Esta acción no se puede deshacer. Esto eliminará permanentemente a",
     "delete": "Eliminar",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "toastDelete": "ha sido eliminado"
   },
   "FormTabs": {
     "questions": "Preguntas",
@@ -113,15 +123,24 @@
     "dark": "Oscuro"
   },
   "EditingModeMenu": {
-    "editionMode": "Modo de Edición"
+    "editionMode": "Modo de Edición",
+    "toast": "Modo de Edición está",
+    "toastEnabled": "habilitado",
+    "toastDisabled": "deshabilitado"
   },
   "SendForm": {
     "sendButton": "Enviar",
     "sendFormTitle": "Enviar formulario",
     "sendVia": "Enviar via",
+    "linkTitle": "Enlace",
     "link": "Copiar enlace",
     "shareLink": "Compartir",
     "downloadQR": "Descargar QR",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "toastLinkCopied": "Enlace copiado al portapapeles",
+    "toastQrCopied": "Código QR compartido correctamente",
+    "toastQrCopiedError": "Error al compartir el código QR",
+    "toastQrError": "Web Share no está soportado en tu navegador",
+    "toastQrDownloaded": "Código QR descargado correctamente"
   }
 }

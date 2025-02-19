@@ -39,7 +39,12 @@
     "title": "Admin Panel",
     "description": "Manage quickly any users and forms.",
     "users": "Users",
-    "forms": "Forms"
+    "forms": "Forms",
+    "toast": "has been",
+    "toastBlocked": "blocked",
+    "toastUnblocked": "unblocked",
+    "toastAdmin": "promoted to admin",
+    "toastDemoted": "demoted from admin"
   },
   "RecentForms": {
     "title": "Recent Forms",
@@ -77,13 +82,19 @@
     "formEditFormPreview2": "edition mode",
     "formEmptyForm": "Empty Form",
     "formEmptyFormDescription": "This form currently has no fields. Click the button below to add fields to this form.",
-    "formEmptyFormDescription2": "No fields are available in this form."
+    "formEmptyFormDescription2": "No fields are available in this form.",
+    "formGoBack": "Back",
+    "toastUpdate": "Form updated successfully",
+    "toastClone": "Form cloned successfully",
+    "toastCloneError": "Failed to clone form",
+    "toastSaveForm": "Form has been saved successfully"
   },
   "DeleteDialog": {
     "title": "Are you sure?",
     "description": "This action cannot be undone. This will permanently delete",
     "delete": "Delete",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "toastDelete": "has been deleted"
   },
   "FormTabs": {
     "questions": "Questions",
@@ -112,15 +123,24 @@
     "dark": "Dark"
   },
   "EditingModeMenu": {
-    "editionMode": "Edition Mode"
+    "editionMode": "Edition Mode",
+    "toast": "Edition mode is",
+    "toastEnabled": "enabled",
+    "toastDisabled": "disabled"
   },
   "SendForm": {
     "sendButton": "Send",
     "sendFormTitle": "Send form",
     "sendVia": "Send via",
+    "linkTitle": "Link",
     "link": "Copy link",
     "shareLink": "Share link",
     "downloadQR": "Download QR",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "toastLinkCopied": "Link copied to clipboard",
+    "toastQrCopied": "Qr Code shared successfully",
+    "toastQrCopiedError": "Failed to share Qr Code",
+    "toastQrError": "Web Share is not supported in your browser",
+    "toastQrDownloaded": "Qr Code downloaded successfully"
   }
 }

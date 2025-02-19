@@ -39,7 +39,12 @@
     "title": "Panneau d'administration",
     "description": "Gérez rapidement tous les utilisateurs et les formulaires.",
     "users": "Utilisateurs",
-    "forms": "Formulaires"
+    "forms": "Formulaires",
+    "toast": "a été",
+    "toastBlocked": "bloqué",
+    "toastUnblocked": "débloqué",
+    "toastAdmin": "promu à administrateur",
+    "toastDemoted": "rétrogradé de administrateur"
   },
   "RecentForms": {
     "title": "Formulaires récents",
@@ -78,13 +83,18 @@
     "formEmptyForm": "Formulaire vide",
     "formEmptyFormDescription": "Ce formulaire n'a pas de champs. Cliquez sur le bouton ci-dessous pour ajouter des champs à ce formulaire.",
     "formEmptyFormDescription2": "Aucun champ disponible dans ce formulaire.",
-    "formGoBack": "Retour"
+    "formGoBack": "Retour",
+    "toastUpdate": "Formulaire mis à jour avec succès",
+    "toastClone": "Formulaire cloné avec succès",
+    "toastCloneError": "Erreur lors du clonage du formulaire",
+    "toastSaveForm": "Formulaire enregistré avec succès"
   },
   "DeleteDialog": {
     "title": "Êtes-vous sûr?",
     "description": "Cette action ne peut pas être annulée. Cette action supprimera définitivement",
     "delete": "Supprimer",
-    "cancel": "Annuler"
+    "cancel": "Annuler",
+    "toastDelete": "a été supprimé"
   },
   "FormTabs": {
     "questions": "Questions",
@@ -113,15 +123,24 @@
     "dark": "Sombre"
   },
   "EditingModeMenu": {
-    "editionMode": "Mode d'édition"
+    "editionMode": "Mode d'édition",
+    "toast": "Mode d'édition est",
+    "toastEnabled": "activé",
+    "toastDisabled": "désactivé"
   },
   "SendForm": {
     "sendButton": "Envoyer",
     "sendFormTitle": "Envoyer le formulaire",
     "sendVia": "Envoyer via",
+    "linkTitle": "Lien",
     "link": "Copier le lien",
     "shareLink": "Partager le lien",
     "downloadQR": "Télécharger le QR",
-    "cancel": "Annuler"
+    "cancel": "Annuler",
+    "toastLinkCopied": "Lien copié dans le presse-papiers",
+    "toastQrCopied": "QR Code partagé avec succès",
+    "toastQrCopiedError": "Erreur lors du partage du QR Code",
+    "toastQrError": "Web Share non supporté dans votre navigateur",
+    "toastQrDownloaded": "QR Code téléchargé avec succès"
   }
 }
