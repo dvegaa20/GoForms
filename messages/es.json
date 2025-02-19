@@ -27,6 +27,9 @@
     "terms": "Términos de Servicio",
     "privacy": "Privacidad"
   },
+  "Loading": {
+    "title": "Cargando..."
+  },
   "SearchBar": {
     "placeholder": "Buscar o Presiona",
     "_": "o",
@@ -43,5 +46,82 @@
     "createNewForm": "Crear Nuevo Formulario",
     "selectOption1": "Propio",
     "selectOption2": "Plantillas de GoForms"
+  },
+  "FormCard": {
+    "viewDetails": "Ver Detalles"
+  },
+  "NoForms": {
+    "title": "No se encontraron formularios",
+    "description": "No hay formularios. Crea uno o usa una plantilla"
+  },
+  "MainOrCreateForm": {
+    "formTitlePlaceholder": "Nuevo Formulario",
+    "formDescriptionPlaceholder": "Dale un nombre a tu formulario",
+    "formTopicPlaceholder": "Dale un tema a tu formulario",
+    "formAddQuestion": "Agregar Pregunta",
+    "formQuestionTitle": "Nueva Pregunta",
+    "formQuestionDescription": "Ingresa tu respuesta aquí",
+    "formQuestionTitlePlaceholder": "Ingresa tu pregunta aquí",
+    "formQuestionDescriptionPlaceholder": "Ingresa una pequeña descripción para esta pregunta",
+    "formUserResponsePlaceholder": "Respuesta del usuario aquí",
+    "formUserResponsePlaceholder2": "Ingresa tu respuesta aquí",
+    "formAddOption": "Agregar Opción",
+    "formOption1": "Texto",
+    "formOption2": "Selección Múltiple",
+    "formOption3": "Número",
+    "formOption4": "Sí/No",
+    "formOption5": "Archivo",
+    "formSaveForm": "Guardar Formulario",
+    "formPreviewForm": "Vista Previa del Formulario",
+    "formEditFormPreview": "Para hacer cualquier edición, ingresa al",
+    "formEditFormPreview2": "modo de edición",
+    "formEmptyForm": "Formulario Vacío",
+    "formEmptyFormDescription": "Este formulario no tiene campos. Haz clic en el botón de abajo para agregar campos a este formulario.",
+    "formEmptyFormDescription2": "No hay campos disponibles en este formulario.",
+    "formGoBack": "Volver"
+  },
+  "DeleteDialog": {
+    "title": "¿Estás seguro?",
+    "description": "Esta acción no se puede deshacer. Esto eliminará permanentemente a",
+    "delete": "Eliminar",
+    "cancel": "Cancelar"
+  },
+  "FormTabs": {
+    "questions": "Preguntas",
+    "responses": "Respuestas",
+    "uploads": "Archivos"
+  },
+  "Form": {
+    "enterEditionMode": "Entrar al Modo de Edición",
+    "cloneForm": "Clonar Formulario",
+    "cloning": "Clonando...",
+    "clearForm": "Limpiar Formulario",
+    "disclaimer": "Nota: Solo puedes hacer cambios directos si eres un administrador. Cambia al modo de edición en la esquina superior derecha para hacer cambios.",
+    "formCancel": "Cancelar",
+    "formSaveForm": "Guardar Cambios"
+  },
+  "ResponsesTab": {
+    "summary": "Resumen",
+    "noResponses": "No hay respuestas aún."
+  },
+  "UploadsTab": {
+    "noUploads": "No hay archivos subidos aún.",
+    "noUploadsDescription": "Asegúrate de agregar una pregunta de subida de archivos al formulario o espere a que los usuarios envíen el formulario."
+  },
+  "ModeToggle": {
+    "light": "Claro",
+    "dark": "Oscuro"
+  },
+  "EditingModeMenu": {
+    "editionMode": "Modo de Edición"
+  },
+  "SendForm": {
+    "sendButton": "Enviar",
+    "sendFormTitle": "Enviar formulario",
+    "sendVia": "Enviar via",
+    "link": "Copiar enlace",
+    "shareLink": "Compartir",
+    "downloadQR": "Descargar QR",
+    "cancel": "Cancelar"
   }
 }

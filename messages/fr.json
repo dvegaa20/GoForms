@@ -32,6 +32,9 @@
     "_": "ou",
     "noResults": "Aucun résultat trouvé."
   },
+  "Loading": {
+    "title": "Chargement..."
+  },
   "AdminPanel": {
     "title": "Panneau d'administration",
     "description": "Gérez rapidement tous les utilisateurs et les formulaires.",
@@ -43,5 +46,82 @@
     "createNewForm": "Créer un nouveau formulaire",
     "selectOption1": "Propre",
     "selectOption2": "Modèles de GoForms"
+  },
+  "FormCard": {
+    "viewDetails": "Voir les détails"
+  },
+  "NoForms": {
+    "title": "Aucun formulaire trouvé",
+    "description": "Il n'y a actuellement aucun formulaire. Créez un formulaire ou utilisez un modèle"
+  },
+  "MainOrCreateForm": {
+    "formTitlePlaceholder": "Nouveau formulaire",
+    "formDescriptionPlaceholder": "Donnez un nom à votre formulaire",
+    "formTopicPlaceholder": "Donnez un sujet à votre formulaire",
+    "formAddQuestion": "Ajouter une question",
+    "formQuestionTitle": "Nouvelle question",
+    "formQuestionDescription": "Entrez votre réponse ici",
+    "formQuestionTitlePlaceholder": "Entrez votre question ici",
+    "formQuestionDescriptionPlaceholder": "Entrez une petite description pour cette question",
+    "formUserResponsePlaceholder": "Réponse de l'utilisateur ici",
+    "formUserResponsePlaceholder2": "Entrez votre réponse ici",
+    "formAddOption": "Ajouter une option",
+    "formOption1": "Texte",
+    "formOption2": "Choix multiple",
+    "formOption3": "Nombre",
+    "formOption4": "Oui/Non",
+    "formOption5": "Fichier",
+    "formSaveForm": "Enregistrer le formulaire",
+    "formPreviewForm": "Aperçu du formulaire",
+    "formEditFormPreview": "Pour faire des modifications, entrez le",
+    "formEditFormPreview2": "modo d'édition",
+    "formEmptyForm": "Formulaire vide",
+    "formEmptyFormDescription": "Ce formulaire n'a pas de champs. Cliquez sur le bouton ci-dessous pour ajouter des champs à ce formulaire.",
+    "formEmptyFormDescription2": "Aucun champ disponible dans ce formulaire.",
+    "formGoBack": "Retour"
+  },
+  "DeleteDialog": {
+    "title": "Êtes-vous sûr?",
+    "description": "Cette action ne peut pas être annulée. Cette action supprimera définitivement",
+    "delete": "Supprimer",
+    "cancel": "Annuler"
+  },
+  "FormTabs": {
+    "questions": "Questions",
+    "responses": "Réponses",
+    "uploads": "Fichiers"
+  },
+  "Form": {
+    "enterEditionMode": "Entrer en mode d'édition",
+    "cloneForm": "Cloner le formulaire",
+    "cloning": "Clonage...",
+    "clearForm": "Effacer le formulaire",
+    "disclaimer": "Note: Vous ne pouvez apporter des modifications directes que si vous êtes un administrateur. Basculez le mode d'édition dans le coin supérieur droit pour apporter des modifications.",
+    "formCancel": "Annuler",
+    "formSaveForm": "Enregistrer les modifications"
+  },
+  "ResponsesTab": {
+    "summary": "Résumé",
+    "noResponses": "Aucune réponse encore."
+  },
+  "UploadsTab": {
+    "noUploads": "Aucun fichier téléchargé encore.",
+    "noUploadsDescription": "Assurez-vous d'ajouter une question de téléchargement de fichiers au formulaire ou attendez que les utilisateurs soumettent le formulaire."
+  },
+  "ModeToggle": {
+    "light": "Clair",
+    "dark": "Sombre"
+  },
+  "EditingModeMenu": {
+    "editionMode": "Mode d'édition"
+  },
+  "SendForm": {
+    "sendButton": "Envoyer",
+    "sendFormTitle": "Envoyer le formulaire",
+    "sendVia": "Envoyer via",
+    "link": "Copier le lien",
+    "shareLink": "Partager le lien",
+    "downloadQR": "Télécharger le QR",
+    "cancel": "Annuler"
   }
 }

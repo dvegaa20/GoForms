@@ -27,6 +27,9 @@
     "terms": "Terms of Service",
     "privacy": "Privacy"
   },
+  "Loading": {
+    "title": "Loading..."
+  },
   "SearchBar": {
     "placeholder": "Search or Press",
     "_": "or",
@@ -43,5 +46,81 @@
     "createNewForm": "Create New Form",
     "selectOption1": "Owned by me",
     "selectOption2": "Go Forms Templates"
+  },
+  "FormCard": {
+    "viewDetails": "View Details"
+  },
+  "NoForms": {
+    "title": "No Forms Found",
+    "description": "There are currently no forms. Create one or use a template"
+  },
+  "MainOrCreateForm": {
+    "formTitlePlaceholder": "New Form",
+    "formDescriptionPlaceholder": "Give your form a description",
+    "formTopicPlaceholder": "Give your form a topic",
+    "formAddQuestion": "Add Question",
+    "formQuestionTitle": "New Question",
+    "formQuestionDescription": "Enter your response here",
+    "formQuestionTitlePlaceholder": "Enter your question here",
+    "formQuestionDescriptionPlaceholder": "Enter a small description for this question",
+    "formUserResponsePlaceholder": "User's response here",
+    "formUserResponsePlaceholder2": "Enter your answer here",
+    "formAddOption": "Add Option",
+    "formOption1": "Text",
+    "formOption2": "Multiple Choice",
+    "formOption3": "Number",
+    "formOption4": "Yes/No",
+    "formOption5": "File",
+    "formSaveForm": "Save Form",
+    "formPreviewForm": "Preview Form",
+    "formEditFormPreview": "To make any edits, enter",
+    "formEditFormPreview2": "edition mode",
+    "formEmptyForm": "Empty Form",
+    "formEmptyFormDescription": "This form currently has no fields. Click the button below to add fields to this form.",
+    "formEmptyFormDescription2": "No fields are available in this form."
+  },
+  "DeleteDialog": {
+    "title": "Are you sure?",
+    "description": "This action cannot be undone. This will permanently delete",
+    "delete": "Delete",
+    "cancel": "Cancel"
+  },
+  "FormTabs": {
+    "questions": "Questions",
+    "responses": "Responses",
+    "uploads": "Uploads"
+  },
+  "Form": {
+    "enterEditionMode": "Enter Edition Mode",
+    "cloneForm": "Clone Form",
+    "cloning": "Cloning...",
+    "clearForm": "Clear Form",
+    "disclaimer": "Disclaimer: You can only make direct changes if you are an admin. Toggle edition mode in the top right corner to make changes.",
+    "formCancel": "Cancel",
+    "formSaveForm": "Save Changes"
+  },
+  "ResponsesTab": {
+    "summary": "Summary",
+    "noResponses": "No responses yet."
+  },
+  "UploadsTab": {
+    "noUploads": "No uploads found.",
+    "noUploadsDescription": "Make sure to add a file upload question to the form or wait for users to submit the form."
+  },
+  "ModeToggle": {
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "EditingModeMenu": {
+    "editionMode": "Edition Mode"
+  },
+  "SendForm": {
+    "sendButton": "Send",
+    "sendFormTitle": "Send form",
+    "sendVia": "Send via",
+    "link": "Copy link",
+    "shareLink": "Share link",
+    "downloadQR": "Download QR",
+    "cancel": "Cancel"
   }
 }
