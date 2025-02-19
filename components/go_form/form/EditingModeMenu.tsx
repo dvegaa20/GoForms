@@ -20,7 +20,7 @@ export function EditingModeMenu() {
   useEffect(() => {
     if (hasMounted) {
       toast.warning(
-        `Edition mode is ${isEditingMode ? "enabled" : "disabled"}`
+        `${t("toast")} ${isEditingMode ? t("toastEnabled") : t("toastDisabled")}`
       );
     } else {
       setHasMounted(true);
