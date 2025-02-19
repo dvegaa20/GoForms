@@ -4,6 +4,7 @@ import { Lock, Unlock, UserCog } from "lucide-react";
 import { Button } from "@/../components/ui/button";
 import { toast } from "sonner";
 import DeleteDialog from "./DeleteDialog";
+import { useTranslations } from "next-intl";
 
 export default function UserItem({
   user,
@@ -11,6 +12,7 @@ export default function UserItem({
   onToggleAdmin,
   onDelete,
 }) {
+  const t = useTranslations("AdminPanel");
   return (
     <div className="flex items-center justify-between p-2 border rounded">
       <span className="truncate flex-1 max-w-[160px]">{`${user.first_name} ${user.last_name}`}</span>
@@ -21,7 +23,9 @@ export default function UserItem({
           onClick={() => {
             onToggleBlock(user.id);
             toast.success(
-              `${user.first_name} ${user.last_name} has been ${user.isBlocked ? "unblocked" : "blocked"}`
+              `${user.first_name} ${user.last_name} ${t("toast")} ${
+                user.isBlocked ? t("toastUnblocked") : t("toastBlocked")
+              }`
             );
           }}
         >
@@ -37,8 +41,8 @@ export default function UserItem({
           onClick={() => {
             onToggleAdmin(user.id);
             toast.success(
-              `${user.first_name} ${user.last_name} has been ${
-                user.isAdmin ? "demoted from admin" : "promoted to admin"
+              `${user.first_name} ${user.last_name} ${t("toast")} ${
+                user.isAdmin ? t("toastDemoted") : t("toastAdmin")
               }`
             );
           }}
