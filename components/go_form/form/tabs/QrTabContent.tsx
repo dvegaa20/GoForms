@@ -23,14 +23,14 @@ export default function QrTabContent() {
           text: "Check out this form:",
           url: url,
         })
-        .then(() => toast.success("Link shared successfully"))
+        .then(() => toast.success(t("toastQrCopied")))
         .catch((error) => {
           if (error.name !== "AbortError") {
-            toast.error("Failed to share link");
+            toast.error(t("toastQrCopiedError"));
           }
         });
     } else {
-      toast.error("Web Share is not supported in your browser");
+      toast.error(t("toastQrError"));
     }
   };
 
@@ -51,7 +51,7 @@ export default function QrTabContent() {
       downloadLink.click();
     };
     img.src = "data:image/svg+xml;base64," + btoa(svgData);
-    toast.success("QR code downloaded successfully");
+    toast.success(t("toastQrDownloaded"));
   };
 
   return (
