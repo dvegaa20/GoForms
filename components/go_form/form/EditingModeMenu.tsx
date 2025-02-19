@@ -12,11 +12,11 @@ import {
 import { useEditingMode } from "@/../store/store";
 import { toast } from "sonner";
 import { useEffect, useState } from "react";
-
+import { useTranslations } from "next-intl";
 export function EditingModeMenu() {
   const { isEditingMode, toggleEditingMode } = useEditingMode();
   const [hasMounted, setHasMounted] = useState(false);
-
+  const t = useTranslations("EditingModeMenu");
   useEffect(() => {
     if (hasMounted) {
       toast.warning(
@@ -45,7 +45,7 @@ export function EditingModeMenu() {
           }}
           className="flex items-center justify-between"
         >
-          <span>Edition Mode</span>
+          <span>{t("editionMode")}</span>
           <Switch
             checked={isEditingMode}
             onCheckedChange={toggleEditingMode}

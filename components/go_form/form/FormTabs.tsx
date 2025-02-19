@@ -4,12 +4,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/../components/ui/tabs";
 import { usePathname } from "next/navigation";
 import { cn } from "@/../lib/utils";
 import Link from "next/link";
-
-const tabs = [
-  { title: "Questions", href: "" },
-  { title: "Responses", href: "responses" },
-  { title: "Uploads", href: "uploads" },
-] as const;
+import { useTranslations } from "next-intl";
 
 export default function FormTabs({
   form,
@@ -19,6 +14,12 @@ export default function FormTabs({
   responses: number;
 }) {
   const pathname = usePathname();
+  const t = useTranslations("FormTabs");
+  const tabs = [
+    { title: t("questions"), href: "" },
+    { title: t("responses"), href: "responses" },
+    { title: t("uploads"), href: "uploads" },
+  ] as const;
   return (
     <Tabs defaultValue="questions">
       <TabsList className="w-full bg-transparent gap-x-4 !p-0 h-full">
@@ -27,7 +28,7 @@ export default function FormTabs({
           const isActive =
             tab.href === ""
               ? pathname === formIdPage
-              : pathname.includes(`${formIdPage}/${tab.href}`);
+              : pathname?.includes(`${formIdPage}/${tab.href}`);
           return (
             <TabsTrigger
               key={tab.href}

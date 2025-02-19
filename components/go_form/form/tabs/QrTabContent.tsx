@@ -7,11 +7,13 @@ import { toast } from "sonner";
 import { QRCodeSVG } from "qrcode.react";
 import { Download, Share } from "lucide-react";
 import { Card, CardContent } from "@/../components/ui/card";
+import { useTranslations } from "next-intl";
 
 export default function QrTabContent() {
   const params = useParams();
-  const id = params.id;
+  const id = params?.id;
   const url = `${window.location.origin}/forms/${id}`;
+  const t = useTranslations("SendForm");
 
   const shareQR = () => {
     if (navigator.share) {
@@ -41,7 +43,7 @@ export default function QrTabContent() {
     img.onload = () => {
       canvas.width = img.width;
       canvas.height = img.height;
-      ctx.drawImage(img, 0, 0);
+      ctx?.drawImage(img, 0, 0);
       const pngFile = canvas.toDataURL("image/png");
       const downloadLink = document.createElement("a");
       downloadLink.download = "qr-code";
@@ -65,11 +67,11 @@ export default function QrTabContent() {
       <div className="flex justify-end space-x-2">
         <Button size="sm" variant="outline" onClick={shareQR}>
           <Share className="w-4 h-4 mr-2" />
-          Share Link
+          {t("shareLink")}
         </Button>
         <Button size="sm" onClick={downloadQR}>
           <Download className="w-4 h-4 mr-2" />
-          Download QR
+          {t("downloadQR")}
         </Button>
       </div>
     </TabsContent>

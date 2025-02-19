@@ -4,13 +4,14 @@ import { useParams, usePathname } from "next/navigation";
 import { Tabs, TabsList, TabsTrigger } from "@/../components/ui/tabs";
 import { cn } from "@/../lib/utils";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export default function ResponsesTabs() {
   const pathname = usePathname();
   const params = useParams();
-  const responsesPage = `/dashboard/forms/${params.id}/responses`;
+  const responsesPage = `/dashboard/forms/${params?.id}/responses`;
   const isActive = pathname === responsesPage;
-
+  const t = useTranslations("ResponsesTab");
   return (
     <Tabs defaultValue="questions" className="w-full">
       <TabsList className="w-full bg-transparent gap-x-4 !p-0 h-full justify-evenly">
@@ -27,7 +28,7 @@ export default function ResponsesTabs() {
               className="font-medium text-sm flex items-center px-2"
               href={responsesPage}
             >
-              Summary
+              {t("summary")}
             </Link>
             <hr
               className={cn(

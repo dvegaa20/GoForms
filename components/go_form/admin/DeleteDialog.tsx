@@ -12,6 +12,7 @@ import {
 import { Button } from "@/../components/ui/button";
 import { Trash } from "lucide-react";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 export default function DeleteDialog({
   user,
@@ -23,7 +24,7 @@ export default function DeleteDialog({
   onDelete: any;
 }) {
   const [open, setOpen] = useState(false);
-
+  const t = useTranslations("DeleteDialog");
   const handleConfirmDelete = () => {
     onDelete(user ? user.id : form.id);
     toast.success(
@@ -39,9 +40,9 @@ export default function DeleteDialog({
       </Button>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+          <AlertDialogTitle>{t("title")}</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete{" "}
+            {t("description")}{" "}
             <strong>
               {user ? `${user.first_name} ${user.last_name}` : form.title}
             </strong>
@@ -50,10 +51,10 @@ export default function DeleteDialog({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel onClick={() => setOpen(false)}>
-            Cancel
+            {t("cancel")}
           </AlertDialogCancel>
           <AlertDialogAction onClick={handleConfirmDelete}>
-            Delete
+            {t("delete")}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

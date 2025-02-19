@@ -30,6 +30,7 @@ import { Reorder } from "framer-motion";
 import { useFormStore } from "@/../store/store";
 import { createForm } from "@/../lib/actions/form_actions";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 export default function CreateForm() {
   const title = useFormStore((state) => state.title);
@@ -39,6 +40,7 @@ export default function CreateForm() {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [isEditingMode, setIsEditingMode] = useState(true);
   const router = useRouter();
+  const t = useTranslations("MainOrCreateForm");
 
   const handleQuestionChange = (
     order: number,
@@ -106,8 +108,8 @@ export default function CreateForm() {
       {
         order: newOrder,
         question_type: "text",
-        question_title: "New Question",
-        question_description: "Enter your response here",
+        question_title: t("formQuestionTitle"),
+        question_description: t("formQuestionDescription"),
       },
     ]);
   };
@@ -135,7 +137,7 @@ export default function CreateForm() {
               <Input
                 type="text"
                 value={title}
-                placeholder="Give your form a title"
+                placeholder={t("formTitlePlaceholder")}
                 onChange={(e) => setTitle(e.target.value)}
                 required
                 className="border px-2 py-1 rounded w-full"
@@ -144,7 +146,7 @@ export default function CreateForm() {
                 <Input
                   type="text"
                   value={description}
-                  placeholder="Give your form a description"
+                  placeholder={t("formDescriptionPlaceholder")}
                   onChange={(e) => setDescription(e.target.value)}
                   required
                   className="border px-2 py-1 rounded w-full"
@@ -152,10 +154,10 @@ export default function CreateForm() {
                 <Input
                   type="text"
                   value={topic}
-                  placeholder="Give your form a topic"
+                  placeholder={t("formTopicPlaceholder")}
                   onChange={(e) => setTopic(e.target.value)}
                   required
-                  className="border px-2 py-1 rounded w-48"
+                  className="border px-2 py-1 rounded w-80"
                 />
               </div>
             </div>
@@ -177,7 +179,7 @@ export default function CreateForm() {
                         <Input
                           type="text"
                           value={question.question_title}
-                          placeholder="Enter your question here"
+                          placeholder={t("formQuestionTitlePlaceholder")}
                           onChange={(e) =>
                             handleQuestionChange(
                               question.order,
@@ -201,13 +203,21 @@ export default function CreateForm() {
                             <SelectValue placeholder="Select question type" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="text">Text</SelectItem>
-                            <SelectItem value="radio">
-                              Multiple Choice
+                            <SelectItem value="text">
+                              {t("formOption1")}
                             </SelectItem>
-                            <SelectItem value="number">Number</SelectItem>
-                            <SelectItem value="boolean">Yes/No</SelectItem>
-                            <SelectItem value="file">File</SelectItem>
+                            <SelectItem value="radio">
+                              {t("formOption2")}
+                            </SelectItem>
+                            <SelectItem value="number">
+                              {t("formOption3")}
+                            </SelectItem>
+                            <SelectItem value="boolean">
+                              {t("formOption4")}
+                            </SelectItem>
+                            <SelectItem value="file">
+                              {t("formOption5")}
+                            </SelectItem>
                           </SelectContent>
                         </Select>
                         <Button
@@ -292,7 +302,7 @@ export default function CreateForm() {
                             onClick={() => handleAddOption(question.order)}
                             className="mt-2"
                           >
-                            Add Option
+                            {t("formAddOption")}
                           </Button>
                         )}
                       </RadioGroup>
@@ -301,7 +311,7 @@ export default function CreateForm() {
                         <Input
                           type="text"
                           value={question.question_description}
-                          placeholder="Enter a small description for this question"
+                          placeholder={t("formQuestionDescriptionPlaceholder")}
                           onChange={(e) => {
                             handleQuestionChange(
                               question.order,
@@ -316,7 +326,7 @@ export default function CreateForm() {
                             attributeTypeToInputType[question.question_type] ||
                             "text"
                           }
-                          placeholder="User's response here"
+                          placeholder={t("formUserResponsePlaceholder")}
                           disabled
                           className="border px-2 py-1 rounded w-full mt-2"
                         />
@@ -328,7 +338,7 @@ export default function CreateForm() {
                             attributeTypeToInputType[question.question_type] ||
                             "text"
                           }
-                          placeholder="Enter your response ot this question"
+                          placeholder={t("formUserResponsePlaceholder")}
                           disabled
                           className="border px-2 py-1 rounded w-full mt-2"
                         />
@@ -348,22 +358,22 @@ export default function CreateForm() {
                     toast.success(`Form has been saved successfully`)
                   }
                 >
-                  Save Form
+                  {t("formSaveForm")}
                 </Button>
                 <Button
                   type="button"
                   variant="outline"
                   onClick={() => setIsEditingMode(false)}
                 >
-                  Preview Form
+                  {t("formPreviewForm")}
                 </Button>
               </div>
             </div>
           ) : (
             <div className="flex items-center justify-center mt-6">
-              To make any edits, enter&nbsp;
+              {t("formEditFormPreview")}&nbsp;
               <Button variant="link" onClick={() => setIsEditingMode(true)}>
-                edition mode
+                {t("formEditFormPreview2")}
               </Button>
             </div>
           )}
@@ -371,29 +381,26 @@ export default function CreateForm() {
       ) : (
         <Card>
           <CardHeader>
-            <CardTitle>Empty Form</CardTitle>
-            <CardDescription>
-              This form currently has no fields. Click the button below to add
-              fields to this form.
-            </CardDescription>
+            <CardTitle>{t("formEmptyForm")}</CardTitle>
+            <CardDescription>{t("formEmptyFormDescription")}</CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col items-center justify-center space-y-2">
             <FormInputIcon className="w-12 h-12 text-gray-500" />
             <p className="text-center text-gray-500">
-              No fields are available in this form.
+              {t("formEmptyFormDescription2")}
             </p>
           </CardContent>
           <CardFooter className="flex justify-between">
             <Button asChild variant="outline">
-              <Link href="/dashboard">Go Back</Link>
+              <Link href="/dashboard">{t("formGoBack")}</Link>
             </Button>
-            <Button onClick={handleAddQuestion}>Add Question</Button>
+            <Button onClick={handleAddQuestion}>{t("formAddQuestion")}</Button>
           </CardFooter>
         </Card>
       )}
       {isEditingMode && questions.length > 0 && (
         <Button type="button" onClick={handleAddQuestion} className="w-full">
-          <PlusCircle className="mr-2 h-4 w-4" /> Add Question
+          <PlusCircle className="mr-2 h-4 w-4" /> {t("formAddQuestion")}
         </Button>
       )}
     </main>

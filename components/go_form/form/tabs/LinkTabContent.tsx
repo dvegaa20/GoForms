@@ -8,11 +8,13 @@ import { DialogClose } from "@/../components/ui/dialog";
 import { Button } from "@/../components/ui/button";
 import { toast } from "sonner";
 import { Clipboard } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function LinkTabContent() {
   const params = useParams();
-  const id = params.id;
+  const id = params?.id;
   const url = `${window.location.origin}/forms/${id}`;
+  const t = useTranslations("SendForm");
 
   return (
     <TabsContent value="link" className="px-4 py-4 space-y-3">
@@ -32,10 +34,10 @@ export default function LinkTabContent() {
           }}
         >
           <Clipboard className="w-4 h-4" />
-          Copy link
+          {t("link")}
         </Button>
         <DialogClose asChild>
-          <Button size="sm">Cancel</Button>
+          <Button size="sm">{t("cancel")}</Button>
         </DialogClose>
       </div>
     </TabsContent>

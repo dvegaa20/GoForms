@@ -17,6 +17,7 @@ import {
 } from "@/../components/ui/tabs";
 import LinkTabContent from "./tabs/LinkTabContent";
 import QrTabContent from "./tabs/QrTabContent";
+import { useTranslations } from "next-intl";
 
 const tabs = [
   { value: "link", icon: Link2 },
@@ -24,27 +25,28 @@ const tabs = [
 ];
 
 export default function SendForm() {
+  const t = useTranslations("SendForm");
   return (
     <Dialog>
       <DialogTrigger asChild>
         <div>
           <Send className="md:hidden w-5 h-5" />
           <Button size="sm" className="px-6 hidden md:inline">
-            Send
+            {t("sendButton")}
           </Button>
         </div>
       </DialogTrigger>
       <DialogContent className="p-0">
         <DialogHeader>
           <DialogTitle className="font-normal text-2xl px-4 py-3">
-            Send form
+            {t("sendFormTitle")}
           </DialogTitle>
         </DialogHeader>
         <div>
           <Tabs defaultValue="link" className="p-0">
             <TabsList className="!w-full gap-x-5 px-4 pt-2 pb-0 bg-transparent h-full border-b flex items-center justify-between">
               <div className="flex items-center gap-x-3">
-                <p className="text-sm font-medium mb-2">Send via</p>
+                <p className="text-sm font-medium mb-2">{t("sendVia")}</p>
                 {tabs.map(({ value, icon: Icon }) => (
                   <TabsTrigger
                     key={value}

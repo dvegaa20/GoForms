@@ -38,7 +38,7 @@ import { useEditingMode, useFormOrTemplateStore } from "@/../store/store";
 import SubmitButton from "./SubmitButton";
 import { toast } from "sonner";
 import { Separator } from "@radix-ui/react-select";
-
+import { useTranslations } from "next-intl";
 export default function MainForm({
   form,
   formQuestions,
@@ -57,6 +57,8 @@ export default function MainForm({
   const [state, formAction] = useActionState(addFormData, initialState);
   const { isEditingMode, setEditingMode } = useEditingMode();
   const { selectedOption } = useFormOrTemplateStore();
+  const t = useTranslations("Form");
+  const t2 = useTranslations("MainOrCreateForm");
 
   useEffect(() => {
     if (state.success) {
@@ -246,12 +248,21 @@ export default function MainForm({
                             <SelectValue placeholder="Select question type" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="integer">Integer</SelectItem>
-                            <SelectItem value="text">Text</SelectItem>
-                            <SelectItem value="radio">Options</SelectItem>
-                            <SelectItem value="number">Decimal</SelectItem>
-                            <SelectItem value="boolean">Yes/No</SelectItem>
-                            <SelectItem value="file">File</SelectItem>
+                            <SelectItem value="text">
+                              {t2("formOption1")}
+                            </SelectItem>
+                            <SelectItem value="radio">
+                              {t2("formOption2")}
+                            </SelectItem>
+                            <SelectItem value="number">
+                              {t2("formOption3")}
+                            </SelectItem>
+                            <SelectItem value="boolean">
+                              {t2("formOption4")}
+                            </SelectItem>
+                            <SelectItem value="file">
+                              {t2("formOption5")}
+                            </SelectItem>
                           </SelectContent>
                         </Select>
                         <Button
@@ -261,7 +272,6 @@ export default function MainForm({
                           onClick={() => handleRemoveQuestion(question.order)}
                         >
                           <Trash2 className="h-4 w-4" />
-                          <span className="sr-only">Remove question</span>
                         </Button>
                         <Button type="button" variant="ghost" size="sm">
                           <GripVertical className="h-5 w-5 text-gray-400 cursor-move" />
@@ -333,7 +343,7 @@ export default function MainForm({
                             onClick={() => handleAddOption(question.order)}
                             className="mt-2"
                           >
-                            Add Option
+                            {t2("formAddOption")}
                           </Button>
                         )}
                       </RadioGroup>
@@ -344,7 +354,7 @@ export default function MainForm({
                         type={attributeTypeToInputType[question.question_type]}
                         name={question.order.toString()}
                         id={question.order.toString()}
-                        placeholder="Type your answer here"
+                        placeholder={t2("formUserResponsePlaceholder2")}
                         required={question.required}
                       />
                     )}
@@ -369,7 +379,7 @@ export default function MainForm({
                 <div className="mt-6 space-y-4">
                   <div className="flex flex-col items-center justify-center space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0">
                     <Button variant="outline" size="sm" disabled>
-                      Enter Edition Mode{" "}
+                      {t("enterEditionMode")}
                       <MoreVertical className="w-4 h-4 ml-2" />
                     </Button>
                     <div className="hidden sm:block">
@@ -385,14 +395,12 @@ export default function MainForm({
                       disabled={state?.pending}
                     >
                       <Copy className="w-4 h-4 mr-2" />
-                      {state?.pending ? "Cloning..." : "Clone This Form"}
+                      {state?.pending ? t("cloning") : t("cloneForm")}
                     </Button>
                   </div>
 
                   <p className="text-sm text-muted-foreground text-center max-w-lg mx-auto">
-                    Disclaimer: You can only make direct changes if you are an
-                    admin. Toggle edition mode in the top right corner to make
-                    changes.
+                    {t("disclaimer")}
                   </p>
                 </div>
               ) : (
@@ -403,7 +411,8 @@ export default function MainForm({
                     size="sm"
                     className="flex items-center"
                   >
-                    <PlusCircle className="mr-2 h-4 w-4" /> Add Question
+                    <PlusCircle className="mr-2 h-4 w-4" />{" "}
+                    {t2("formAddQuestion")}
                   </Button>
                   <div className="space-x-2">
                     <Button
@@ -411,7 +420,7 @@ export default function MainForm({
                       size="sm"
                       onClick={handleSubmitUpdate}
                     >
-                      Save Changes
+                      {t("formSaveForm")}
                     </Button>
                     <Button
                       type="button"
@@ -419,7 +428,7 @@ export default function MainForm({
                       size="sm"
                       onClick={() => setEditingMode(false)}
                     >
-                      Cancel
+                      {t("formCancel")}
                     </Button>
                   </div>
                 </div>

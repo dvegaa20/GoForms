@@ -12,6 +12,7 @@ import {
 } from "@/../components/ui/card";
 import BarChart from "@/../components/go_form/form/responses/BarChart";
 import { cookies } from "next/headers";
+import { getTranslations } from "next-intl/server";
 
 export default async function ResponsesPage({
   params,
@@ -20,13 +21,14 @@ export default async function ResponsesPage({
 }) {
   const { id } = await params;
   const selectedOption = (await cookies()).get("selectedOption")?.value;
+  const t = await getTranslations("ResponsesTab");
 
   const [responses, formQuestions] = await Promise.all([
     getResponses({ id }),
     getQuestions({ id, selectedOption }),
   ]);
 
-  const questions = await processQuestions(formQuestions[0], responses);
+  const questions = await processQuestions(formQuestions?.[0], responses);
 
   return (
     <div className="space-y-3.5">
@@ -47,7 +49,7 @@ export default async function ResponsesPage({
               {Object.keys(question.numberOfResponses).length > 0 ? (
                 <BarChart responses={question.responses} />
               ) : (
-                "No responses yet."
+                t("noResponses")
               )}
             </CardContent>
           </Card>

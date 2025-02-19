@@ -12,7 +12,7 @@ import {
 import { cookies } from "next/headers";
 import { ExternalLink, FileX2 } from "lucide-react";
 import Image from "next/image";
-
+import { getTranslations } from "next-intl/server";
 export default async function UploadsPage({
   params,
 }: {
@@ -20,7 +20,7 @@ export default async function UploadsPage({
 }) {
   const { id } = await params;
   const selectedOption = (await cookies()).get("selectedOption")?.value;
-
+  const t = await getTranslations("UploadsTab");
   const [responses, formQuestions] = await Promise.all([
     getResponses({ id }),
     getQuestions({ id, selectedOption }),
@@ -82,13 +82,9 @@ export default async function UploadsPage({
           <div className="border-2 border-dashed border-gray-300 rounded-lg p-12 flex flex-col items-center justify-center text-center min-h-[300px]">
             <FileX2 className="w-16 h-16 text-gray-400 mb-4" />
             <h3 className="text-xl font-semibold text-gray-700 mb-2">
-              No uploads found
+              {t("noUploads")}
             </h3>
-            <p className="text-gray-500">
-              There are currently no uploads for this form. Make sure to add a
-              file upload question to the form or wait for users to submit the
-              form.
-            </p>
+            <p className="text-gray-500">{t("noUploadsDescription")}</p>
           </div>
         </div>
       )}
