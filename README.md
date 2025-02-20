@@ -4,7 +4,7 @@
   
 [![Repo Size](https://img.shields.io/github/repo-size/dvegaa20/GoForms?style=for-the-badge)](https://github.com/dvegaa20/GoForms)
 [![Status](https://img.shields.io/badge/Estado-Activo-success?style=for-the-badge)](https://github.com/dvegaa20/GoForms)
-[![Watchers](https://img.shields.io/github/watchers/yourusername/project?style=for-the-badge)](https://github.com/yourusername/project/watchers)
+[![Watchers](https://img.shields.io/github/watchers/yourusername/project?style=for-the-badge)](https://github.com/dvegaa20/GoForms)
 
 ### 🌟 GoForms: Craft beautiful multilingual forms (🌍 en/es/fr) in minutes! 
 
