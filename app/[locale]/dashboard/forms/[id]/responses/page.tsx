@@ -32,29 +32,44 @@ export default async function ResponsesPage({
 
   return (
     <div className="space-y-3.5">
-      {questions.map((question) =>
-        question.question_type === "file" ? null : (
+      {questions.map((question) => {
+        const validResponses = Object.entries(
+          question.numberOfResponses
+        ).filter(([key]) => key !== "");
+
+        const emptyResponsesCount = question.numberOfResponses[""] || 0;
+
+        return question.question_type === "file" ||
+          (validResponses.length === 0 && emptyResponsesCount === 0) ? null : (
           <Card key={question.order}>
             <CardHeader>
               <CardTitle className="font-normal text-base">
                 {question.question_title}
               </CardTitle>
               <CardDescription className="text-xs">
-                {Object.entries(question.numberOfResponses)
-                  .map(([key, value]) => `${value} answered "${key}"`)
-                  .join(", ")}
+                {[
+                  ...validResponses.map(
+                    ([key, value]) =>
+                      `${value} ${value === 1 ? t("answer") : t("answers")} "${key}"`
+                  ),
+                  ...(emptyResponsesCount > 0
+                    ? [
+                        `${emptyResponsesCount} ${t(
+                          emptyResponsesCount === 1
+                            ? "noAnswerSingle"
+                            : "noAnswerPlural"
+                        )}`,
+                      ]
+                    : []),
+                ].join(", ")}
               </CardDescription>
             </CardHeader>
             <CardContent>
-              {Object.keys(question.numberOfResponses).length > 0 ? (
-                <BarChart responses={question.responses} />
-              ) : (
-                t("noResponses")
-              )}
+              <BarChart responses={question.responses} />
             </CardContent>
           </Card>
-        )
-      )}
+        );
+      })}
     </div>
   );
 }
