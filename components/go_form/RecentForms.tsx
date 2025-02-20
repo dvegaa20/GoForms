@@ -29,8 +29,9 @@ export default function RecentForms() {
         </div>
         <div className="flex flex-col sm:flex-row items-center gap-2">
           <Link href="/dashboard/new" passHref>
-            <Button size="sm" className="whitespace-nowrap px-3">
-              <Plus className="h-4 w-4 mr-1" /> {t("createNewForm")}
+            <Button size="sm" className="px-3 w-[180px]">
+              <Plus className="h-4 w-4 mr-1" />{" "}
+              <p className="truncate">{t("createNewForm")}</p>
             </Button>
           </Link>
           <Select
