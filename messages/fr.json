@@ -156,5 +156,8 @@
   "SuccessPage": {
     "title": "Votre réponse a été enregistrée.",
     "submitAnother": "Envoyer une autre réponse"
+  },
+  "SubmitButton": {
+    "submit": "Envoyer"
   }
 }
