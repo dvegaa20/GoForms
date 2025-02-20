@@ -10,6 +10,7 @@ import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/../i18n/routing";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 
 const fontSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -53,6 +54,7 @@ export default async function RootLayout({
             <NextIntlClientProvider messages={messages}>
               <SpeedInsights />
               {children}
+              <Analytics />
             </NextIntlClientProvider>
             <Toaster />
           </ThemeProvider>
