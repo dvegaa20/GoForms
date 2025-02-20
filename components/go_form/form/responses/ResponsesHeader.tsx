@@ -13,7 +13,7 @@ export default async function ResponsesHeader({ id }: { id: string }) {
   const t = await getTranslations("FormTabs");
 
   return (
-    <Card>
+    <Card className="p-4">
       <hr className="w-full border-t-8 rounded-t-xl border-blue-800" />
       <CardHeader>
         <CardTitle className="font-normal">

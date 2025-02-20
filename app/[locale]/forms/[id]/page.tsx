@@ -21,7 +21,7 @@ export default async function PublicFormIdPage({
   }
 
   return (
-    <div>
+    <div className="p-4">
       <div className="flex justify-end space-x-2 pt-4">
         <LanguageSwitcher />
         <ModeToggle />

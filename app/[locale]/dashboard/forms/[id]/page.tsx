@@ -19,5 +19,9 @@ export default async function FormIdPage({
     notFound();
   }
 
-  return <MainForm form={form[0]} formQuestions={formQuestions} />;
+  return (
+    <div className="p-4">
+      <MainForm form={form[0]} formQuestions={formQuestions} />
+    </div>
+  );
 }
