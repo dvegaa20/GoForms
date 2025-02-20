@@ -365,12 +365,7 @@ export default function MainForm({
           </Reorder.Group>
           {publicForm ? (
             <div className="flex flex-col space-y-2 w-full">
-              <div className="flex items-center justify-between">
-                <SubmitButton />
-                <Button type="button" variant="ghost">
-                  Clear form
-                </Button>
-              </div>
+              <SubmitButton />
               <p className="text-destructive ml-auto">{state?.error}</p>
             </div>
           ) : (
