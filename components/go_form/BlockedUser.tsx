@@ -11,10 +11,12 @@ import {
   AlertDialogTitle,
 } from "@/../components/ui/alert-dialog";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function BlockedUserDialog({ isBlocked }) {
   const [open, setOpen] = useState(isBlocked);
   const router = useRouter();
+  const t = useTranslations("BlockedUser");
 
   useEffect(() => {
     if (isBlocked) {
@@ -26,11 +28,8 @@ export default function BlockedUserDialog({ isBlocked }) {
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Restriced Access</AlertDialogTitle>
-          <AlertDialogDescription>
-            Your account has been blocked. Please contact your administrator for
-            more information.
-          </AlertDialogDescription>
+          <AlertDialogTitle>{t("title")}</AlertDialogTitle>
+          <AlertDialogDescription>{t("description")}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel
@@ -39,7 +38,7 @@ export default function BlockedUserDialog({ isBlocked }) {
               router.push("/");
             }}
           >
-            Redirect to Home
+            {t("redirect")}
           </AlertDialogCancel>
         </AlertDialogFooter>
       </AlertDialogContent>

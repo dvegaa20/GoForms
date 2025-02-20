@@ -142,5 +142,10 @@
     "toastQrCopiedError": "Error al compartir el código QR",
     "toastQrError": "Web Share no está soportado en tu navegador",
     "toastQrDownloaded": "Código QR descargado correctamente"
+  },
+  "BlockedUser": {
+    "title": "Acceso Restringido",
+    "description": "Tu cuenta ha sido bloqueada. Por favor, contacta a tu administrador para más información.",
+    "redirect": "Redirigir a Inicio"
   }
 }

@@ -142,5 +142,10 @@
     "toastQrCopiedError": "Failed to share Qr Code",
     "toastQrError": "Web Share is not supported in your browser",
     "toastQrDownloaded": "Qr Code downloaded successfully"
+  },
+  "BlockedUser": {
+    "title": "Restricted Access",
+    "description": "Your account has been blocked. Please contact your administrator for more information.",
+    "redirect": "Redirect to Home"
   }
 }
