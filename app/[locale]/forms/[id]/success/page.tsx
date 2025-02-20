@@ -7,6 +7,8 @@ import {
 import { fetchFormById } from "@/../lib/actions/form_actions";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
+
 export default async function FormSuccessPage({
   params,
 }: {
@@ -14,6 +16,7 @@ export default async function FormSuccessPage({
 }) {
   const { id } = await params;
   const form = (await fetchFormById({ id, selectedOption: "me" })) as Form[];
+  const t = await getTranslations("SuccessPage");
 
   if (!form) {
     notFound();
@@ -28,14 +31,14 @@ export default async function FormSuccessPage({
             {form[0].title}
           </CardTitle>
 
-          <CardDescription>Your response has been recorded.</CardDescription>
+          <CardDescription>{t("title")}</CardDescription>
 
           <Link
             className="text-blue-600 underline text-sm"
             replace
             href={`/forms/${form[0].id}`}
           >
-            Submit another response
+            {t("submitAnother")}
           </Link>
         </CardHeader>
       </Card>
