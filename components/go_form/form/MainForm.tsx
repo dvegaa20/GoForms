@@ -157,7 +157,7 @@ export default function MainForm({
 
     setEditingMode(false);
 
-    toast.success(t("toastUpdate"));
+    toast.success(t2("toastUpdate"));
   };
 
   const handleCopyTemplate = async (e: React.FormEvent) => {
@@ -181,10 +181,10 @@ export default function MainForm({
         toast.error(result.error);
       } else {
         router.push(`/dashboard`);
-        toast.success(t("toastClone"));
+        toast.success(t2("toastClone"));
       }
     } catch (error) {
-      toast.error(t("toastCloneError"));
+      toast.error(t2("toastCloneError"));
     }
   };
 
