@@ -6,15 +6,19 @@ import {
   CardTitle,
 } from "@/../components/ui/card";
 import ResponsesTab from "@/../components/go_form/form/tabs/ResponsesTab";
+import { getTranslations } from "next-intl/server";
 
 export default async function ResponsesHeader({ id }: { id: string }) {
   const responses = await getResponses({ id });
+  const t = await getTranslations("FormTabs");
+
   return (
     <Card>
       <hr className="w-full border-t-8 rounded-t-xl border-blue-800" />
       <CardHeader>
         <CardTitle className="font-normal">
-          {responses.length} {responses.length === 1 ? "Response" : "Responses"}
+          {responses?.length}{" "}
+          {responses?.length === 1 ? t("response") : t("responses")}
         </CardTitle>
       </CardHeader>
       <CardFooter>

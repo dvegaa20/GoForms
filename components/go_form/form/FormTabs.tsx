@@ -20,6 +20,7 @@ export default function FormTabs({
     { title: t("responses"), href: "responses" },
     { title: t("uploads"), href: "uploads" },
   ] as const;
+
   return (
     <Tabs defaultValue="questions">
       <TabsList className="w-full bg-transparent gap-x-4 !p-0 h-full">
