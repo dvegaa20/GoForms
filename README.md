@@ -17,7 +17,6 @@
 
 ## ✨ Features
 
-🇬🇧 **English**
 - 🌎 Multilingual Form Builder
 - 🛸 Drag-and-Drop Form Creation
 - 🔥 Template System & Form Management
