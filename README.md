@@ -22,7 +22,7 @@
 - 🔥 Template System & Form Management
 - 🗝️ Admin Control Panel
 
-## 🛠️ Tecnologías | Technologies
+## 🛠️ Technologies
 
 <div align="center">
 
@@ -39,7 +39,7 @@
 
 </div>
 
-## 📸 Capturas de Pantalla | Screenshots
+## 📸 Screenshots
 
 <div align="center">
 
