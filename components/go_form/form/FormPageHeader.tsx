@@ -12,7 +12,7 @@ import { LanguageSwitcher } from "@/../components/LangToggle";
 
 export default async function FormPageHeader({ form }: { form: Form[] }) {
   const user = await currentUser();
-  const isAdmin = await fetchUserAdminStatus({ id: user.id });
+  const isAdmin = await fetchUserAdminStatus({ id: user?.id });
   const selectedOption = (await cookies()).get("selectedOption")?.value;
 
   return (
@@ -32,7 +32,7 @@ export default async function FormPageHeader({ form }: { form: Form[] }) {
               <EditingModeMenu />
             </>
           )}
-          {selectedOption === "templates" && isAdmin[0].admin && (
+          {selectedOption === "templates" && isAdmin?.[0]?.admin && (
             <EditingModeMenu />
           )}
           <div className="flex justify-end space-x-2">
@@ -43,7 +43,7 @@ export default async function FormPageHeader({ form }: { form: Form[] }) {
         </div>
       </div>
       {selectedOption === "me" && <FormPageHeaderBottom form={form} />}
-      {selectedOption === "templates" && isAdmin[0].admin && (
+      {selectedOption === "templates" && isAdmin?.[0]?.admin && (
         <FormPageHeaderBottom form={form} />
       )}
     </header>

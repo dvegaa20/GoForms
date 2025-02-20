@@ -10,7 +10,7 @@ import { LanguageSwitcher } from "../LangToggle";
 
 export default async function Header() {
   const user = await currentUser();
-  const isAdmin = await fetchUserAdminStatus({ id: user.id });
+  const isAdmin = await fetchUserAdminStatus({ id: user?.id });
 
   return (
     <header className="flex justify-between items-center sticky top-0 gap-x-4 py-2 bg-white z-50 w-full mx-auto shadow dark:bg-black">
@@ -27,7 +27,7 @@ export default async function Header() {
           <ModeToggle />
         </div>
         <UserButton />
-        {isAdmin[0].admin && <AdminPanel />}
+        {isAdmin?.[0]?.admin && <AdminPanel />}
       </div>
     </header>
   );

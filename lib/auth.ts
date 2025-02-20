@@ -9,7 +9,7 @@ export async function getUserStatus() {
     if (!user) return { isBlocked: false, id: null };
 
     const status = await fetchUserStatus({ id: user.id });
-    return { isBlocked: status[0]?.status === "blocked", id: user.id };
+    return { isBlocked: status?.[0]?.status === "blocked", id: user.id };
   } catch (error) {
     console.error(error);
     return { isBlocked: false, id: null };
