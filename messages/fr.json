@@ -99,6 +99,7 @@
   "FormTabs": {
     "questions": "Questions",
     "responses": "Réponses",
+    "response": "Réponse",
     "uploads": "Fichiers"
   },
   "Form": {
@@ -112,7 +113,11 @@
   },
   "ResponsesTab": {
     "summary": "Résumé",
-    "noResponses": "Aucune réponse encore."
+    "noResponses": "Aucune réponse encore.",
+    "answer": "répondit",
+    "answers": "répondirent",
+    "noAnswerSingle": "n'a pas répondu",
+    "noAnswerPlural": "n'a pas répondu"
   },
   "UploadsTab": {
     "noUploads": "Aucun fichier téléchargé encore.",
@@ -147,5 +152,9 @@
     "title": "Accès restreint",
     "description": "Votre compte a été bloqué. Veuillez contacter votre administrateur pour plus d'informations.",
     "redirect": "Rediriger vers la maison"
+  },
+  "SuccessPage": {
+    "title": "Votre réponse a été enregistrée.",
+    "submitAnother": "Envoyer une autre réponse"
   }
 }

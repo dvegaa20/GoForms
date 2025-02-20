@@ -99,6 +99,7 @@
   "FormTabs": {
     "questions": "Preguntas",
     "responses": "Respuestas",
+    "response": "Respuesta",
     "uploads": "Archivos"
   },
   "Form": {
@@ -112,7 +113,11 @@
   },
   "ResponsesTab": {
     "summary": "Resumen",
-    "noResponses": "No hay respuestas aún."
+    "noResponses": "No hay respuestas aún.",
+    "answer": "respondió",
+    "answers": "respondieron",
+    "noAnswerSingle": "no respondió",
+    "noAnswerPlural": "no respondieron"
   },
   "UploadsTab": {
     "noUploads": "No hay archivos subidos aún.",
@@ -147,5 +152,9 @@
     "title": "Acceso Restringido",
     "description": "Tu cuenta ha sido bloqueada. Por favor, contacta a tu administrador para más información.",
     "redirect": "Redirigir a Inicio"
+  },
+  "SuccessPage": {
+    "title": "Tu respuesta ha sido registrada.",
+    "submitAnother": "Enviar otra respuesta"
   }
 }

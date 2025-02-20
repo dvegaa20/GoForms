@@ -99,6 +99,7 @@
   "FormTabs": {
     "questions": "Questions",
     "responses": "Responses",
+    "response": "Response",
     "uploads": "Uploads"
   },
   "Form": {
@@ -112,7 +113,11 @@
   },
   "ResponsesTab": {
     "summary": "Summary",
-    "noResponses": "No responses yet."
+    "noResponses": "No responses yet.",
+    "answer": "answered",
+    "answers": "answered",
+    "noAnswerSingle": "didn't answer",
+    "noAnswerPlural": "didn't answer"
   },
   "UploadsTab": {
     "noUploads": "No uploads found.",
@@ -147,5 +152,9 @@
     "title": "Restricted Access",
     "description": "Your account has been blocked. Please contact your administrator for more information.",
     "redirect": "Redirect to Home"
+  },
+  "SuccessPage": {
+    "title": "Your response has been recorded.",
+    "submitAnother": "Submit another response"
   }
 }
