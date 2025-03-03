@@ -14,6 +14,7 @@ import Link from "next/link";
 import { useFormOrTemplateStore } from "@/../store/store";
 import { useSyncStoreWithCookie } from "@/../hooks/useSyncStore-Cookie";
 import { useTranslations } from "next-intl";
+import IntegrationsMenu from "@/../components/go_form/ItegrationsMenu";
 
 export default function RecentForms() {
   const { selectedOption, setSelectedOption } = useFormOrTemplateStore();
@@ -53,6 +54,8 @@ export default function RecentForms() {
         </div>
       </div>
       <FormList />
+
+      <IntegrationsMenu />
     </section>
   );
 }
