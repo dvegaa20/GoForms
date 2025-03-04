@@ -1,30 +1,54 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/../components/ui/button";
 import Image from "next/image";
+import { IntegrationButton } from "@/../components/go_form/integrations/IntegrationButton";
 
 export default function ExpandableMenu() {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [openPopoverIndex, setOpenPopoverIndex] = useState<number | null>(null);
 
-  const menuItems = [
+  const menuItems: IntegrationItem[] = [
     {
       icon: (
         <Image src="/salesforce.svg" alt="Salesforce" width={24} height={24} />
       ),
-      action: <div>cfdscfd</div>,
+      action: "salesforce",
       text: "Salesforce Integration",
+      fields: [
+        { id: "salesforce-api-key", label: "API Key", type: "password" },
+        { id: "salesforce-instance", label: "Instance URL", type: "text" },
+      ],
     },
     {
       icon: <Image src="/odoo.svg" alt="Odoo" width={24} height={24} />,
-      action: <div>cdscdscds</div>,
+      action: "odoo",
       text: "Odoo Integration",
+      fields: [{ id: "odoo-url", label: "Odoo", type: "text" }],
     },
     {
       icon: <Image src="/jira.svg" alt="Jira" width={24} height={24} />,
-      action: <div>cdscdscds</div>,
-      text: "Jira Integration",
+      action: "jira",
+      text: "Create a Jira Ticket",
+      fields: [
+        { id: "jira-ticket-summary", label: "Summary", type: "text" },
+        {
+          id: "jira-ticket-description",
+          label: "Description",
+          type: "text",
+        },
+        {
+          id: "jira-ticket-issueType",
+          label: "Issue Type",
+          type: "select",
+          options: [
+            { value: "Task", label: "Task" },
+            { value: "Epic", label: "Epic" },
+            { value: "Story", label: "Story" },
+            { value: "Bug", label: "Bug" },
+          ],
+        },
+      ],
     },
   ];
 
@@ -33,45 +57,22 @@ export default function ExpandableMenu() {
       className="absolute bottom-6 right-10 p-2"
       onMouseEnter={() => setIsExpanded(true)}
       onMouseLeave={() => {
-        setIsExpanded(false);
-        setHoveredIndex(null);
+        if (openPopoverIndex === null) {
+          setIsExpanded(false);
+        }
       }}
     >
       <div className="flex items-center">
         {menuItems.map((item, index) => (
-          <div
+          <IntegrationButton
             key={index}
-            className="relative"
-            onMouseEnter={() => setHoveredIndex(index)}
-            onMouseLeave={() => setHoveredIndex(null)}
-          >
-            {hoveredIndex === index && (
-              <div
-                className="absolute -top-10 left-1/2 -translate-x-1/2 bg-black/80 text-white px-3 py-1.5 rounded-md text-sm whitespace-nowrap
-                          animate-in fade-in slide-in-from-bottom-2 duration-200"
-              >
-                {item.text}
-                <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-black/80 rotate-45" />
-              </div>
-            )}
-            <Button
-              variant="outline"
-              className={`
-                relative rounded-full w-12 h-12 p-0 overflow-hidden
-                transition-all duration-500 ease-in-out shadow-xl
-                hover:scale-110
-                ${isExpanded ? "translate-x-3" : "-ml-6"}
-              `}
-              style={{
-                transitionDelay: isExpanded ? `${index * 50}ms` : "0ms",
-                zIndex: menuItems.length - index,
-              }}
-            >
-              <div className="absolute inset-0 flex items-center justify-center rounded-full">
-                <span className="font-semibold text-lg">{item.icon}</span>
-              </div>
-            </Button>
-          </div>
+            item={item}
+            index={index}
+            isExpanded={isExpanded}
+            menuLength={menuItems.length}
+            openPopoverIndex={openPopoverIndex}
+            setOpenPopoverIndex={setOpenPopoverIndex}
+          />
         ))}
       </div>
     </div>
