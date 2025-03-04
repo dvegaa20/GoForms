@@ -32,5 +32,9 @@ export default clerkMiddleware(async (auth, req: NextRequest) => {
 });
 
 export const config = {
-  matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
+  matcher: [
+    "/((?!api|.*\\..*|_next).*)", // Excluye rutas que empiezan con /api, archivos, etc.
+    "/(trpc)(.*)",
+    "/(en|es|fr)(/.*)", // Permite las rutas con prefijos de idioma
+  ],
 };
