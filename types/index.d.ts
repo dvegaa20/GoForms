@@ -46,3 +46,32 @@ declare interface FormStore {
   setSelectedOption: (option: string) => void;
   syncWithCookie: () => void;
 }
+
+declare interface IntegrationField {
+  id: string;
+  label: string;
+  type: string;
+  options?: { value: string; label: string }[];
+}
+
+declare interface IntegrationItem {
+  icon: ReactNode;
+  action: string;
+  text: string;
+  fields: IntegrationField[];
+}
+
+declare interface IntegrationFormProps {
+  item: IntegrationItem;
+  onSubmit: (e: React.FormEvent) => Promise<void>;
+  isSubmitting: boolean;
+}
+
+declare interface IntegrationButtonProps {
+  item: IntegrationItem;
+  index: number;
+  isExpanded: boolean;
+  menuLength: number;
+  openPopoverIndex: number | null;
+  setOpenPopoverIndex: (index: number | null) => void;
+}
